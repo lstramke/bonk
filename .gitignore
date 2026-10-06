@@ -1,0 +1,49 @@
+# Odin build artifacts
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.wasm
+*.pdb
+
+# Local build output
+/bin/
+/build/
+/dist/
+/out/
+
+# Odin tooling and generated files
+.odin-cache/
+odin-cache/
+*.odin-doc
+
+# Raylib and native build output
+CMakeCache.txt
+CMakeFiles/
+cmake-build-*/
+Makefile
+compile_commands.json
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editors and IDEs
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and local environment files
+*.log
+.env
+.env.*
+!.env.example
