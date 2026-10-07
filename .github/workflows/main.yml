@@ -24,21 +24,10 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v7
 
-      - name: Install raylib
+      - name: Install Odin and raylib
         run: |
-          sudo apt-get update
-          sudo apt-get install --yes libraylib-dev
-
-      - name: Install Odin build dependencies
-        run: |
-          sudo apt-get install --yes clang llvm-dev libllvm-dev
-
-      - name: Build and install Odin
-        run: |
-          odin_dir="$RUNNER_TEMP/Odin"
-          git clone --depth 1 https://github.com/odin-lang/Odin.git "$odin_dir"
-          make -C "$odin_dir" release-native
-          echo "$odin_dir" >> "$GITHUB_PATH"
+          brew update
+          brew install odin raylib
 
       - name: Run Odin tests
         run: odin test src
@@ -46,7 +35,7 @@ jobs:
   build-macos:
     name: Build macOS DMG
     if: startsWith(github.ref, 'refs/tags/')
-    runs-on: macos-14
+    runs-on: macos-26
     permissions:
       contents: read
 
