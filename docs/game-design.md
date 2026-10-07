@@ -63,6 +63,64 @@ flowchart TD
 
 ### What Can the Player Do?
 
+Ein Spieler kann sich innerhalb der durch die Karte vorgegebenen begehbaren
+Bereiche frei bewegen und seine verfügbaren Aktionen ausführen. Bewegungen und
+Aktionen sind nicht auf einen bestimmten Bewegungszustand beschränkt.
+
+#### Movement
+
+| Bewegung | Tastaturbelegung | Festlegung |
+| --- | --- | --- |
+| Nach links bewegen | `A` oder Pfeiltaste links | Der Spieler kann sich nach links bewegen, soweit es die Karte erlaubt. |
+| Nach rechts bewegen | `D` oder Pfeiltaste rechts | Der Spieler kann sich nach rechts bewegen, soweit es die Karte erlaubt. |
+| Springen | `W` oder Pfeiltaste oben | Der Spieler kann springen. Ein Sprung kann mit einer Bewegungsrichtung nach links oder rechts verbunden werden. |
+| Ducken | `S` oder Pfeiltaste unten | Der Spieler kann sich ducken. Auch beim Ducken kann eine Bewegungsrichtung nach links oder rechts beibehalten werden. |
+
+#### Equipment Slots
+
+Jeder Spieler besitzt einen Hand-Slot und drei standardmäßige Rüstungsslots.
+Alle Gegenstände werden zunächst über den Hand-Slot aufgenommen. Nur
+Gegenstände, die als Rüstung definiert sind, können aus dem Hand-Slot in einen
+passenden Rüstungsslot angelegt werden.
+
+| Slot | Erlaubte Gegenstände | Regel |
+| --- | --- | --- |
+| Hand-Slot | Waffen, Tränke und Rüstungsgegenstände | Es kann immer nur ein Gegenstand gleichzeitig in der Hand gehalten werden. |
+| Kopfschutz | Helme | Nur ein Helm kann angelegt werden. Ist der Slot belegt, fällt der bisherige Helm beim Ersetzen auf die Karte. |
+| Körperschutz | Körperrüstungen | Nur eine Körperrüstung kann angelegt werden. Ist der Slot belegt, fällt die bisherige Körperrüstung beim Ersetzen auf die Karte. |
+| Fußschutz | Schuhe und andere Fußrüstungen | Nur ein Fußschutz kann angelegt werden. Ist der Slot belegt, fällt der bisherige Fußschutz beim Ersetzen auf die Karte. |
+
+#### Actions
+Alle verfügbaren Aktionen können in jedem Bewegungszustand eingesetzt werden, auch während der Spieler läuft, springt oder sich duckt.
+
+| Aktion | Steuerung | Umfasst | Festlegung |
+| --- | --- | --- | --- |
+| Gegenstände aufnehmen und verwenden | Linksklick | Aufnehmen, schießen, Trank konsumieren und Rüstung anlegen | Ein kurzer Klick nimmt einen passenden Gegenstand auf, wenn der Hand-Slot frei ist. Wird der Linksklick gehalten, wird der gehaltene Gegenstand verwendet. Das Konsumieren eines Tranks und das Anlegen einer Rüstung benötigen eine definierte Ausführungsdauer. |
+| Gegenstand fallen lassen | Rechtsklick | Gegenstand fallen lassen | Ein gehaltener Gegenstand wird in die aktuelle Laufrichtung geworfen. Dadurch wird der Hand-Slot frei. |
+| Waffe nachladen | `R` | Nachladen | Eine nachladbare Waffe wird über `R` nachgeladen, wenn ihr Magazin leer ist. |
+| Bewegung während einer Aktion | Bewegungstasten | Bewegen und gleichzeitig Gegenstände aufnehmen, verwenden oder fallen lassen | Bewegung und Gegenstandsaktionen können gleichzeitig ausgeführt werden. Bewegung unterbricht das Konsumieren eines Tranks oder das Anlegen einer Rüstung nicht. |
+
+Das Fallenlassen von Ausrüstung beim Tod ist keine Spieleraktion. Stirbt ein
+Spieler, lässt er seine angelegte Rüstung und den Gegenstand in seinem Hand-Slot
+auf der Karte fallen.
+
+Die Linksklick-Logik ist:
+
+1. einen passenden Gegenstand aufnehmen, wenn der Hand-Slot frei ist,
+2. den gehaltenen Gegenstand verwenden, solange der Linksklick gehalten wird,
+3. bei einer gehaltenen Waffe während des Haltens zielen und beim Loslassen schießen.
+
+Ein Trank wird durch Gedrückthalten konsumiert. Eine Rüstung wird durch
+Gedrückthalten angelegt. Beide Aktionen werden erst nach ihrer vollständigen
+Ausführungsdauer abgeschlossen. Bewegung unterbricht diese Aktionen nicht. Wird
+der Linksklick vor Abschluss losgelassen, wird die jeweilige Aktion abgebrochen
+und nicht angewendet. Beim Schießen wird während des Haltens gezielt; der Schuss
+wird erst beim Loslassen des Linksklicks ausgelöst.
+
+Ein Spieler kann somit gleichzeitig Kopfschutz, Körperschutz und Fußschutz
+angelegt haben und einen Gegenstand im Hand-Slot halten. Die Rüstungsteile und
+der gehaltene Gegenstand belegen unterschiedliche Slots.
+
 ## Character Design
 
 ## Maps
