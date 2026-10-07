@@ -121,8 +121,28 @@ Ein Spieler kann somit gleichzeitig Kopfschutz, Körperschutz und Fußschutz
 angelegt haben und einen Gegenstand im Hand-Slot halten. Die Rüstungsteile und
 der gehaltene Gegenstand belegen unterschiedliche Slots.
 
+## Game Items
+
+Dieser Bereich beschreibt alle aufnehmbaren und verwendbaren Spielgegenstände,
+einschließlich Waffen, Rüstungen, Tränken und weiteren Items.
+
+Die Unterkategorien werden später jeweils in eigenen Dateien beschrieben:
+
+- Waffen
+- Rüstung
+- Tränke
+
+Spielgegenstände können durch Lootboxen auf der Map erhalten werden. Zusätzlich
+können Charakterfähigkeiten bestimmte Gegenstände erzeugen oder einem Spieler
+direkt zur Verfügung stellen. Ein Magier könnte beispielsweise eine Fähigkeit
+besitzen, die ihm einen Trank gibt.
+
+| Hauptkategorie | Beschreibung |
+| --- | --- |
+| Waffen | Gegenstände im Hand-Slot, die zum Angreifen verwendet werden und je nach Waffentyp Munition benötigen oder nachgeladen werden können. |
+| Rüstung | Gegenstände, die über den Hand-Slot aufgenommen und anschließend in einen passenden Rüstungsslot angelegt werden. |
+| Tränke | Verbrauchbare Gegenstände im Hand-Slot, die durch Gedrückthalten des Linksklicks konsumiert werden und einen Effekt auslösen. |
+
 ## Character Design
 
 ## Maps
-
-## Weapons and Equipment
