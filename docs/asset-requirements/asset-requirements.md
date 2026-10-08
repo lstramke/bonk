@@ -8,6 +8,11 @@ Dieses Dokument definiert die grundlegende Ordnerstruktur und Organisation der A
 - IDs werden in `snake_case` geschrieben, beispielsweise `lootbox`, `health_potion` oder `arena_01`.
 - Dateinamen werden ebenfalls in `snake_case` geschrieben.
 - Jede Definition wird in einer eigenen korrekten YAML-Datei gespeichert.
+- Alle Assets müssen mit der verwendeten Engine auf Basis von Odin und raylib kompatibel sein.
+- Für Pixel-Art-Sprites sind PNG-Dateien das bevorzugte Format.
+- Asset-Abmessungen und Pixelformate sollen innerhalb eines Asset-Typs konsistent sein.
+- Asset-Dateien müssen in einem Format vorliegen, das zur vorgesehenen Lade- und Rendering-Pipeline passt.
+
 
 ## Asset Directory Structure
 
