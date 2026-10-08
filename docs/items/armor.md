@@ -24,7 +24,6 @@ type: head
 stats:
   armor:
     physical: 25
-    explosive: 5
     magic: 0
 
 assets:
@@ -32,10 +31,9 @@ assets:
   equipped_sprite: sprites/items/armor/iron-helmet-equipped.png
 ```
 
-Die drei Werte unter `stats.armor` sind für jedes Rüstungsteil erforderlich:
+Die zwei Werte unter `stats.armor` sind für jedes Rüstungsteil erforderlich:
 
 - `physical` schützt vor physischem Schaden.
-- `explosive` schützt vor Explosionsschaden.
 - `magic` schützt vor magischem Schaden.
 
 Die Werte werden beim Anlegen zur Charakterrüstung in derselben Schadensart

@@ -31,20 +31,16 @@ stats:
   health_regeneration: 0
   armor:
     physical: 0
-    explosive: 0
     magic: 0
   damage_modifiers:
     melee:
       physical: 1.0
-      explosive: 1.0
       magic: 1.0
     range:
       physical: 1.0
-      explosive: 1.0
       magic: 1.0
     explosive:
       physical: 1.0
-      explosive: 1.0
       magic: 1.0
 abilities:
   passive: []
@@ -81,20 +77,16 @@ stats:
   health_regeneration: 0
   armor:
     physical: 0
-    explosive: 0
     magic: 0
   damage_modifiers:
     melee:
       physical: 1.0
-      explosive: 1.0
       magic: 1.0
     range:
       physical: 1.0
-      explosive: 1.0
       magic: 1.0
     explosive:
       physical: 1.0
-      explosive: 1.0
       magic: 1.0
 abilities:
   active:
@@ -137,8 +129,8 @@ Die Werte unter `stats` bilden die initialen Charakterwerte für das Spiel:
 - `health` definiert die maximale Gesundheit und den Ausgangswert zu
   Rundenbeginn, sofern der Charakter keine abweichende Regel besitzt.
 - `health_regeneration` definiert die passive Gesundheitsregeneration.
-- `stats.armor` definiert getrennte Rüstungswerte für physische, explosive und
-  magische Schadensarten.
+- `stats.armor` definiert getrennte Rüstungswerte für physische und magische
+  Schadensarten.
 - `stats.damage_modifiers` verändert den verursachten Schaden je nach
   Kombination aus Waffentyp und Schadensart.
   Der Wert `1.0` entspricht 100 Prozent des normalen Schadens,
@@ -154,34 +146,37 @@ Kombinationen verstärken:
 damage_modifiers:
   melee:
     physical: 2.0
-    explosive: 1.0
     magic: 1.0
 
 # Kampfmagier: spezialisiert auf magische Nahkampfangriffe
 damage_modifiers:
   melee:
     physical: 1.0
-    explosive: 1.0
     magic: 2.0
+
+# Sprengmeister: spezialisiert auf explosive Angriffe
+damage_modifiers:
+  explosive:
+    physical: 2.0
+    magic: 1.0
 ```
 
 Ein Bonus für `melee.physical` gilt nur für eine Waffe, deren Werte
 `type: melee` und `damage_type: physical` enthalten. Eine magische
-Nahkampfwaffe verwendet stattdessen `melee.magic`. Es gibt keinen separaten
+Nahkampfwaffe verwendet stattdessen `melee.magic`.
+Eine physische Explosivwaffe verwendet `explosive.physical`, eine magische
+Explosivwaffe `explosive.magic`. Es gibt keinen separaten
 Fallback vom kombinierten Wert auf den Waffentyp; nicht spezifizierte
 Kombinationen werden beim Erzeugen der vollständigen Charakterdaten mit dem
 Standardwert `1.0` ergänzt.
 
-Jeder Charakter besitzt einen eigenen Rüstungswert für jede der drei Schadensarten:
+Jeder Charakter besitzt einen eigenen Rüstungswert für jede der zwei Schadensarten:
 
 - `physical` für stumpfen und spitzen Schaden,
-- `explosive` für Explosionsschaden,
 - `magic` für magischen Schaden.
 
 Die Rüstungswerte des Charakters werden mit den Rüstungswerten der angelegten
-Gegenstände in derselben Schadensart addiert. Ein Ritter kann beispielsweise
-eine erhöhte `physical`-Rüstung besitzen, während seine Explosions- und
-Magie-Rüstung unverändert bleiben. Eine separate Resistenz-Eigenschaft gibt es
+Gegenstände in derselben Schadensart addiert. Eine separate Resistenz-Eigenschaft gibt es
 nicht; die Schadensreduktion wird ausschließlich aus der passenden
 Rüstungskategorie berechnet.
 
@@ -267,7 +262,6 @@ loot_preferences:
     explosive: 1.0
   armor:
     physical: 1.0
-    explosive: 1.0
     magic: 1.0
   potions: 1.0
 ```
@@ -309,4 +303,3 @@ seine Höhe auf `crouch_height` reduziert, während der Fußpunkt an derselben
 Stelle bleibt. Ein Spieler kann nur wieder aufstehen, wenn oberhalb des
 reduzierten Colliders ausreichend Platz für den stehenden Collider vorhanden
 ist. Die verwendeten Maßeinheiten werden global für das Spiel festgelegt.
-

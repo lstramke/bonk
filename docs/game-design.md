@@ -32,7 +32,7 @@ Diese Person gewinnt das gesamte Spiel.
 | Charakterabweichungen | Ein Charakter kann von der vollen Startgesundheit abweichen, wenn seine Definition dies vorsieht. |
 | Fähigkeiten | Der Cooldown einer Fähigkeit startet mit Beginn der Runde. Beträgt der Cooldown 0, ist die Fähigkeit direkt verfügbar. |
 | Ausrüstung | Alle Spieler starten jede Runde ohne Waffen und ohne Ausrüstung. |
-| Schadensarten | Es gibt zunächst `physical`, `explosive` und `magic`. |
+| Schadensarten | Es gibt zunächst `physical` und `magic`. |
 | Waffentypen | Es gibt zunächst `melee`, `range` und `explosive`. Die ausführliche Definition steht in [Weapons](items/weapons.md). |
 | Tranktypen | Es gibt zunächst `drink` und `throw`. Die ausführliche Definition steht in [Potions](items/potions.md). |
 | Rüstungstypen | Es gibt zunächst `head`, `body` und `feet`. Die ausführliche Definition steht in [Armor](items/armor.md). |
