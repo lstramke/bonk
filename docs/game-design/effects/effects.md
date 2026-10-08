@@ -4,11 +4,14 @@ Dieses Dokument beschreibt die wiederverwendbaren Effektdefinitionen in B.O.N.K.
 
 ## Effect Types
 
-- `heal`: Stellt Gesundheit einmalig wieder her und verwendet `amount`.
-- `armor`: Verändert die Rüstung und verwendet `amount`, `duration` und optional `damage_types`.
-- `movement_speed`: Verändert die Bewegungsgeschwindigkeit und verwendet `multiplier` und `duration`.
-- `damage_modifier`: Verändert den verursachten Schaden und verwendet `multiplier`, `duration` und optional `damage_types`.
-- `poison`: Verursacht über einen bestimmten Zeitraum regelmäßig Schaden und verwendet `damage`, `damage_type`, `duration` und `tick_interval`.
+| Action            | Beschreibung                                                     | Parameter                                            |
+| ----------------- | ---------------------------------------------------------------- | ---------------------------------------------------- |
+| `heal`            | Stellt Gesundheit einmalig wieder her.                           | `amount`                                             |
+| `armor`           | Verändert die Rüstung für eine bestimmte Dauer.                  | `amount`, `duration`, optional `damage_types`        |
+| `movement_speed`  | Verändert die Bewegungsgeschwindigkeit für eine bestimmte Dauer. | `multiplier`, `duration`                             |
+| `damage_modifier`  | Verändert den verursachten Schaden für eine bestimmte Dauer.     | `multiplier`, `duration`, optional `damage_types`    |
+| `poison`          | Verursacht über einen bestimmten Zeitraum regelmäßig Schaden.    | `damage`, `damage_type`, `duration`, `tick_interval` |
+
 
 `damage_types` ist eine Liste und kann beispielsweise `physical` und `magic` enthalten.
 
