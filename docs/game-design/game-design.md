@@ -153,3 +153,5 @@ Die ausführlichen Definitionen der bestehenden Item-Kategorien befinden sich in
 Die vollständige technische Definition der Charaktere befindet sich im separaten Dokument [Character Design](characters/character-design.md).
 
 ## Maps
+
+Die vollständige technische Definition der Maps befindet sich im separaten Dokument [Map Design](maps/map-design.md).
