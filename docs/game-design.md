@@ -156,7 +156,7 @@ assets/items/weapons/<weapon-id>.yaml
 | Identity | Stabile ID, Anzeigename und Beschreibung |
 | Classification | Waffentyp und Schadensart |
 | Stats | Grundschaden, Schussverhalten, Munition, Projektil, Reichweite |
-| Assets | Welt-Sprite, Hand-Sprite, Projektil |
+| Assets | Welt-Sprite, Hand-Sprite, Projektil und Audio |
 
 ### Weapon File Example
 
@@ -192,6 +192,8 @@ assets:
   world_sprite: sprites/items/weapons/pistol.png
   hand_sprite: sprites/items/weapons/pistol-hand.png
   projectile_sprite: sprites/projectiles/pistol-bullet.png
+  audio:
+    shot: sounds/weapons/pistol-shot.wav
 ```
 
 `type` beschreibt die Funktions- oder Waffenkategorie. `damage_type` beschreibt
@@ -236,6 +238,10 @@ Lebensdauer und Radius sind für eigenständige Projektile erforderlich.
 `stats.range` ist für alle Waffen erforderlich. `stats.effects` ist optional
 und wird nur angelegt, wenn die Waffe zusätzliche Trefferwirkungen wie
 Rückstoß besitzt.
+
+`assets.audio.shot` verweist auf den Sound, der beim erfolgreichen Schuss
+abgespielt wird. Der Sound gehört zur Waffendatei, damit jede Waffe ihren
+eigenen Schuss-Sound verwenden kann.
 
 Die aktuellen Munitionswerte, der Magazininhalt und die verbleibende
 Nachladezeit gehören zum Laufzeitstatus und nicht in die Waffendatei. Die Datei
@@ -316,6 +322,8 @@ stats:
 assets:
   world_sprite: sprites/items/potions/healing-potion.png
   hand_sprite: sprites/items/potions/healing-potion-hand.png
+  audio:
+    use: sounds/potions/healing-potion-use.wav
 ```
 
 Ein geworfener Schadens- oder Debuff-Trank kann dieselbe Struktur verwenden:
@@ -344,6 +352,8 @@ assets:
   world_sprite: sprites/items/potions/poison-flask.png
   hand_sprite: sprites/items/potions/poison-flask-hand.png
   projectile_sprite: sprites/projectiles/poison-flask.png
+  audio:
+    impact: sounds/potions/poison-flask-impact.wav
 ```
 
 `stats.use_time` ist die Aktivierungsdauer. `stats.target` definiert das
@@ -352,6 +362,11 @@ eine oder mehrere Wirkungen. Jede Wirkung benötigt mindestens einen `type`;
 zusätzliche Werte wie `amount`, `duration`, `damage_type` oder
 `damage_per_second` hängen von dieser Wirkung ab. Bei geworfenen Tränken ist
 `stats.projectile` erforderlich. Bei getrunkenen Tränken wird es weggelassen.
+
+`assets.audio.use` ist der Sound für die erfolgreiche Verwendung des Tranks und
+für jeden Trank erforderlich. Bei `type: throw` ist zusätzlich
+`assets.audio.impact` für den Aufprall erforderlich. Bei `type: drink` wird
+`impact` weggelassen.
 
 Ein Trank ist nach erfolgreicher Anwendung verbraucht. Der laufende Effekt,
 die verbleibende Dauer und die bereits angewendete Wirkung gehören zum
