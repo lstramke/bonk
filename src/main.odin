@@ -11,16 +11,16 @@ main :: proc() {
 	frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
 	defer rl.UnloadTexture(frank_texture)
 
-	stone_texture := rl.LoadTexture("assets/sprites/tiles/stone-block-basic.png")
+	stone_texture := rl.LoadTexture("assets/sprites/tiles/stone_block_basic.png")
 	defer rl.UnloadTexture(stone_texture)
 
-	dirt_texture := rl.LoadTexture("assets/sprites/tiles/dirt-block-basic.png")
+	dirt_texture := rl.LoadTexture("assets/sprites/tiles/dirt_block_basic.png")
 	defer rl.UnloadTexture(dirt_texture)
 
-	grass_texture := rl.LoadTexture("assets/sprites/tiles/grass-block-basic.png")
+	grass_texture := rl.LoadTexture("assets/sprites/tiles/grass_block_basic.png")
 	defer rl.UnloadTexture(grass_texture)
 
-	lootbox_texture := rl.LoadTexture("assets/sprites/tiles/lootbox-block.png")
+	lootbox_texture := rl.LoadTexture("assets/sprites/tiles/lootbox_block.png")
 	defer rl.UnloadTexture(lootbox_texture)
 
 	if !rl.IsTextureValid(lootbox_texture) {
