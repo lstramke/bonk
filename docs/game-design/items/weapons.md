@@ -266,7 +266,6 @@ attack:
   use_time: 0
 projectile:
   speed: 600
-  lifetime: 1.0
   hitbox:
     type: circle
     radius: 2
@@ -292,7 +291,6 @@ attack:
   spread: 20
 projectile:
   speed: 500
-  lifetime: 0.8
   hitbox:
     type: circle
     radius: 2
@@ -358,7 +356,6 @@ Kollision die bereits aufgelösten Schadenswerte der Waffe:
 Projectile
 ├── position
 ├── velocity
-├── lifetime_remaining
 ├── collision_shape
 ├── damage_by_type
 ├── owner_id
@@ -401,7 +398,6 @@ stats:
     reload_time: 1.2
   projectile:
     speed: 600
-    lifetime: 1.0
     hitbox:
       type: circle
       radius: 2
@@ -428,7 +424,6 @@ stats:
     use_time: 0
   projectile:
     speed: 320
-    lifetime: 2.0
     hitbox:
       type: circle
       radius: 5
@@ -442,7 +437,6 @@ Ein wellenförmiges Projektil kann später dieselbe Struktur verwenden:
 ```yaml
 projectile:
   speed: 320
-  lifetime: 2.0
   hitbox:
     type: circle
     radius: 5
