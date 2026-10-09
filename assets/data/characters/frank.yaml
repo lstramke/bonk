@@ -22,7 +22,7 @@ stats:
         magic: 0.75
 abilities:
   active:
-    id: ability_id
+    id: regeneration
   passive: []
 
 equipment:

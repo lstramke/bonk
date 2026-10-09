@@ -1,0 +1,9 @@
+id: regeneration
+name: Regeneration
+
+cooldown: 10.0
+
+effects:
+  - id: heal_over_time
+    overrides:
+      duration: 5.0
