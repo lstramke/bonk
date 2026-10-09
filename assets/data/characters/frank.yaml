@@ -1,0 +1,55 @@
+id: frank
+display_name: Frank
+description: Tank/Slow/HighHealth/Halloween/Scary
+role_id: role_tank
+
+stats:
+  movement_speed: 140
+  health: 150
+  health_regeneration: 0
+  armor:
+    physical: 20
+    magic: 10
+  damage_modifiers:
+      melee:
+        physical: 2.0
+        magic: 0.5
+      range:
+        physical: 0.75
+        magic: 0.25
+      explosive:
+        physical: 1.0
+        magic: 0.75
+abilities:
+  active:
+    id: regeneration
+  passive: []
+
+equipment:
+  starting_items: []
+
+collision:
+  width: 32
+  height: 64
+  crouch_height: 40
+  pivot: [16, 64]
+
+assets:
+  sprite_sheet: sprites/characters/frank.svg
+  frame_size: [32, 64]
+  scale: 1.0
+  pivot: [16, 64]
+  icon: ui/characters/frank-icon.png
+  portrait: ui/characters/frank-portrait.png
+  animations:
+    idle: idle
+    run: run
+    jump: jump
+    fall: fall
+    crouch: crouch
+    hurt: hurt
+    death: death
+  audio:
+    footsteps: sounds/characters/frank-footsteps.wav
+    hurt: sounds/characters/frank-hurt.wav
+    death: sounds/characters/frank-death.wav

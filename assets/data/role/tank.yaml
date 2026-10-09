@@ -1,0 +1,19 @@
+id: tank
+display_name: Tank
+description: Tank focused role.
+
+loot_preferences:
+  weapons:
+    melee:
+      physical: 1.5
+      magic: 1.0
+    range:
+      physical: 1.0
+      magic: 1.0
+    explosive:
+      physical: 1.0
+      magic: 1.0
+  armor:
+    physical: 2.0
+    magic: 1.0
+  potions: 1.0
