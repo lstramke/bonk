@@ -16,7 +16,7 @@ Dieses Dokument beschreibt die aktiven Fähigkeiten in B.O.N.K.
 
 Jede aktive Fähigkeit wird in einer eigenen YAML-Datei beschrieben:
 
-`assets/abilities/<ability-id>.yaml`
+`assets/data/abilities/<ability-id>.yaml`
 
 Fähigkeiten definieren ihre Wirkung, ihren Cooldown und die zugehörigen Parameter. Effekte können über ihre ID referenziert und bei Bedarf mit `overrides` angepasst werden.
 

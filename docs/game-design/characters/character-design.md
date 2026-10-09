@@ -11,7 +11,7 @@ Cooldown, gehört nicht in diese Datei.
 Die Charakterdateien liegen unter:
 
 ```text
-assets/characters/<character-id>.yaml
+assets/data/characters/<character-id>.yaml
 ```
 
 #### Character Defaults Example
@@ -19,7 +19,7 @@ assets/characters/<character-id>.yaml
 Die globalen Standardwerte liegen separat unter:
 
 ```text
-assets/config/character-defaults.yaml
+assets/data/configs/character-defaults.yaml
 ```
 Die Standarddatei enthält die gemeinsame Ausgangsstruktur. Eine Charakterdatei
 muss nur Pflichtfelder und Werte enthalten, die vom Standard abweichen.

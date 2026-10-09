@@ -47,7 +47,7 @@ Projektilverhalten wird pro Waffe festgelegt.
 Jede Waffe wird in einer eigenen YAML-Datei beschrieben:
 
 ```text
-assets/items/weapons/<weapon-id>.yaml
+assets/data/items/weapons/<weapon-id>.yaml
 ```
 
 Alle Waffen verwenden denselben Header:

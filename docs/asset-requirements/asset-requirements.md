@@ -37,7 +37,9 @@ assets/
 ├── music/
 │
 └── data/
+    ├── configs/
     ├── tiles/
+    ├── roles/
     ├── characters/
     ├── items/
     ├── weapons/

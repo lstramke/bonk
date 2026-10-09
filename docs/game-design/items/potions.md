@@ -12,7 +12,7 @@ und wird von [game-design.md](../game-design.md) referenziert.
 
 Jeder Trank wird in einer eigenen YAML-Datei beschrieben:
 
-`assets/items/potions/<potion-id>.yaml`
+`assets/data/items/potions/<potion-id>.yaml`
 
 Das Feld `type` definiert die Nutzungsform:
 

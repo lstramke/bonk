@@ -20,7 +20,7 @@ tatsächlicher Schaden = Eingangsschaden × 100 / (100 + armor)
 Jedes Rüstungsteil wird in einer eigenen YAML-Datei beschrieben:
 
 ```text
-assets/items/armor/<armor-id>.yaml
+assets/data/items/armor/<armor-id>.yaml
 ```
 
 `type` bestimmt den kompatiblen Rüstungsslot. Die zentralen Typen sind
