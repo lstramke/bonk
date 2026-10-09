@@ -242,7 +242,7 @@ Spielauswahl aufgenommen werden können.
 Rollendateien liegen separat unter:
 
 ```text
-assets/roles/<role-id>.yaml
+assets/data/roles/<role-id>.yaml
 ```
 
 Eine Rolle beschreibt gemeinsame Design- und Content-Gewichtungen, ohne die

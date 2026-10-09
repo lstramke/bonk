@@ -42,9 +42,9 @@ assets/
     ├── roles/
     ├── characters/
     ├── items/
-    ├── weapons/
-    ├── potions/
-    ├── armor/
+│   │   ├── weapons/
+│   │   ├── potions/
+│   │   └── armor/
     ├── effects/
     └── abilities/
 ```

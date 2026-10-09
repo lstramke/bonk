@@ -6,7 +6,7 @@ Dieses Dokument beschreibt die wiederverwendbaren Effektdefinitionen in B.O.N.K.
 
 | Action            | Beschreibung                                                     | Parameter                                            |
 | ----------------- | ---------------------------------------------------------------- | ---------------------------------------------------- |
-| `heal`            | Stellt Gesundheit einmalig wieder her.                           | `amount`                                             |
+| `heal`            | Stellt Gesundheit wieder her.                                    | `amount`                                             |
 | `armor`           | Verändert die Rüstung für eine bestimmte Dauer.                  | `amount`, `duration`, optional `damage_types`        |
 | `movement_speed`  | Verändert die Bewegungsgeschwindigkeit für eine bestimmte Dauer. | `multiplier`, `duration`                             |
 | `damage_modifier`  | Verändert den verursachten Schaden für eine bestimmte Dauer.     | `multiplier`, `duration`, optional `damage_types`    |
@@ -17,13 +17,11 @@ Dieses Dokument beschreibt die wiederverwendbaren Effektdefinitionen in B.O.N.K.
 
 Multiplikatoren beziehen sich auf den normalen Wert. `1.25` entspricht 125 %, `0.5` entspricht 50 %.
 
-Effekte verursachen keinen automatisch direkten Projektilschaden. Ihre Wirkung wird durch den jeweiligen Effekt-Typ und dessen Definition bestimmt.
-
 ## Effect File Format
 
 Jeder Effekt wird in einer eigenen YAML-Datei beschrieben:
 
-`assets/effects/<effect-id>.yaml`
+`assets/data/effects/<effect-id>.yaml`
 
 Effekte definieren ihre Wirkungsart, Standardwerte und optional zugehörige Assets. Items, Fähigkeiten, Fallen und andere Spielsysteme können Effekte über ihre ID referenzieren.
 

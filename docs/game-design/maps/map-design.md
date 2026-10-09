@@ -39,12 +39,13 @@ description: Eine Arena für Platformer-Kämpfe.
 tile_size: [16, 16]
 
 background: sprites/backgrounds/arena.png
+music: music/arena_01.ogg
 
 tile_mapping:
   0: null
-  1: sprites/tiles/grass_block.png
-  2: sprites/tiles/stone_block.png
-  3: sprites/tiles/lootbox_block.png
+  1: data/tiles/grass_block.yaml
+  2: data/tiles/stone_block.yaml
+  3: data/tiles/lootbox_block.yaml
 
 layers:
   - id: terrain
@@ -71,7 +72,6 @@ Map-Assets werden zentral unter `assets/` organisiert.
 * `assets/sprites/tiles/`: Sprites für Tiles und Blöcke.
 * `assets/sprites/characters/`: Sprites für Charaktere.
 * `assets/sprites/items/`: Sprites für Items.
-* `assets/sounds/`: Soundeffekte.
 * `assets/music/`: Musik.
 
 Maps referenzieren Assets über ihre relativen Asset-Pfade. Sprite-Dateien werden nicht in Map-Dateien eingebettet oder dupliziert.
@@ -80,16 +80,17 @@ Der Hintergrund ist eine eigenständige visuelle Ebene. Die eigentliche Spielfl�
 
 ## Tile Mapping
 
-Das `tile_mapping` ordnet numerischen IDs die jeweiligen Tile-Sprites zu.
+Das `tile_mapping` ordnet numerischen IDs den jeweiligen Tile-Definitionen zu. Die Definitionen werden als YAML-Dateien zentral unter `assets/data/tiles/` gespeichert.
+Das Format der Tile-YAMLs ist in [tile-design.md](tile-design.md) definiert.
 
 Beispiel:
 
 ```yaml
 tile_mapping:
   0: null
-  1: sprites/tiles/grass_block.png
-  2: sprites/tiles/stone_block.png
-  3: sprites/tiles/lootbox_block.png
+  1: data/tiles/grass_block.yaml
+  2: data/tiles/stone_block.yaml
+  3: data/tiles/lootbox_block.yaml
 ```
 
 Die Bedeutung der IDs ist damit zum Beispiel:
@@ -99,13 +100,13 @@ Die Bedeutung der IDs ist damit zum Beispiel:
 * `2`: Steinblock.
 * `3`: Lootbox-Block.
 
-Die numerischen IDs werden innerhalb der Map verwendet, um die Tile-Layer kompakt darzustellen.
+Die numerischen IDs werden innerhalb der Map verwendet, um die Tile-Layer kompakt darzustellen. Alle anderen IDs verweisen auf die jeweilige YAML-Definition des Tile-Typs.
 
-Eine Lootbox, ein Grasblock oder ein Steinblock ist jeweils ein eigenständiger Tile-Typ. Ein Tile kann neben seinem Sprite eigene Gameplay-Eigenschaften besitzen, beispielsweise Kollisionsverhalten, Zerstörbarkeit oder Interaktionslogik.
-
-Die Gameplay-Eigenschaften sollen nicht allein aus dem Sprite-Pfad oder dem Namen einer Datei abgeleitet werden. Sie werden separat durch die jeweilige Tile-Definition festgelegt.
+Die Tile-Definition enthält die visuellen Referenzen und Gameplay-Eigenschaften des Tiles, beispielsweise den Sprite-Pfad, das Kollisionsverhalten, die Zerstörbarkeit und mögliche Interaktionen.
 
 Die IDs müssen innerhalb einer Map eindeutig sein. Die konkrete Zuordnung darf zwischen unterschiedlichen Maps variieren.
+
+Tile-Definitionen können dadurch in mehreren Maps wiederverwendet werden, ohne ihre Eigenschaften oder Sprite-Pfade in jeder Map erneut definieren zu müssen.
 
 ## Tile Layers
 

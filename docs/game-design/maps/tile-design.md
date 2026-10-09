@@ -20,8 +20,10 @@ walkable: true
 events:
   - trigger: interact
     action: drop_item
+    event_sprite: sprites/tiles/lootbox_block_open.png
     cooldown: 1.0
 ```
+
 
 Die Felder haben folgende Bedeutung:
 
@@ -34,10 +36,14 @@ walkable: Gibt an, ob eine Entität auf dem Tile stehen beziehungsweise darüber
 * `trigger`: Legt fest, wodurch ein Event ausgelöst wird.
 * `action`: Legt fest, welche Gameplay-Aktion ausgeführt wird.
 * `cooldown`: Optionale Wartezeit in Sekunden, bevor das Event erneut ausgelöst werden kann.
+* `event_sprite`: Optionaler relativer Pfad zu einem Sprite, das im Zusammenhang mit dem Event angezeigt wird. Das Sprite kann beispielsweise einen veränderten visuellen Zustand des Tiles darstellen, nachdem das Event ausgelöst wurde. Wenn kein `event_sprite` definiert ist, bleibt die Darstellung des Tiles unverändert.
+
+Die Game-Engine verwaltet, wann das Event ausgelöst wird und wie lange das zugehörige Sprite angezeigt wird. Ob die Darstellung dauerhaft wechselt, nur während der Ausführung des Events gilt oder nach einer bestimmten Zeit zurückgesetzt wird, hängt von der Implementierung des jeweiligen Events ab.
 
 ## Tile Events
 
 Ein Tile-Event besteht aus einem `trigger` und einer `action`. Der Trigger bestimmt, wann das Event ausgelöst wird; die Action definiert, was daraufhin passiert.
+Es kann ein extra sprite dafür hinterlegt werden.
 
 ### Unterstützte Trigger
 

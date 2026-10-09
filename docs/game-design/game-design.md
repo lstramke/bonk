@@ -46,7 +46,6 @@ Diese Person gewinnt das gesamte Spiel.
 | Verbindungsabbruch | Ein Verbindungsabbruch wird über die Synchronisation behandelt. Verliert ein Spieler während einer Runde die Verbindung, zählt dies wie sein Tod und beendet seine Teilnahme an dieser Runde. |
 | Beitritt | Neue Spieler können einem laufenden Spiel nicht beitreten. Die Spielerkonfiguration wird über die Synchronisation zwischen den Runden beibehalten. |
 | Charakterwahl | Jeder Spieler wählt für ein Spiel genau einen Charakter. Dieser Charakter bleibt für das gesamte Spiel aktiv und kann nicht gewechselt werden. |
-| Kartenzeitlimit | Ein Zeitlimit ist zunächst nicht allgemein definiert. In Zukunft kann eine Karte ein eigenes Zeitlimit oder ein eigenes Event vorgeben. |
 
 ```mermaid
 flowchart TD
@@ -147,7 +146,6 @@ Die ausführlichen Definitionen der bestehenden Item-Kategorien befinden sich in
 - [Armor](items/armor.md)
 - [Potions](items/potions.md)
 
-
 ## Character Design
 
 Die vollständige technische Definition der Charaktere befindet sich im separaten Dokument [Character Design](characters/character-design.md).
@@ -155,3 +153,10 @@ Die vollständige technische Definition der Charaktere befindet sich im separate
 ## Maps
 
 Die vollständige technische Definition der Maps befindet sich im separaten Dokument [Map Design](maps/map-design.md).
+Die dazu notwendigen Tiles werden in [tile-design.md](maps/tile-design.md) beschrieben.
+
+## Abilities and Effects
+
+Die vollständige technische Definition der Abilities befindet sich in separaten Dokumenten: [aktive Fähigkeiten](abilities/active-abilities.md) und [passive Fähigkeiten](abilities/passive-abilities.md).
+
+Die Effekte werden in [](effects/effects.md) beschreiben.

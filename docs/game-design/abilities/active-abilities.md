@@ -8,7 +8,7 @@ Dieses Dokument beschreibt die aktiven Fähigkeiten in B.O.N.K.
 | -------------- | -------------------------------------------------------------------- |
 | `regeneration` | Erhöht die Lebensregeneration für eine bestimmte Dauer.              |
 | `dash`         | Bewegt den Spieler um eine bestimmte Distanz in Bewegungsrichtung.   |
-| `sniper`       | Erhöht den verursachten physischen Schaden für eine bestimmte Dauer. |
+| `sniper`       | Erhöht den verursachten physischen Schaden für eine bestimmte Dauer von range Waffen. |
 | `mental_focus` | Erhöht den verursachten magischen Schaden für eine bestimmte Dauer.  |
 | `tinkerer`     | Gewährt dem Spieler eine explosive Waffe.                            |
 
@@ -56,7 +56,7 @@ name: Sniper
 cooldown: 12.0
 
 effects:
-  - id: physical_damage_boost
+  - id: physical_range_weapon_damage_boost
     overrides:
       multiplier: 1.5
       duration: 5.0
