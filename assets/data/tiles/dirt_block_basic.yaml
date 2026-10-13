@@ -1,0 +1,7 @@
+id: dirt_block_basic
+name: Dirt Block
+
+sprite: sprites/tiles/dirt_block_basic.png
+
+destructible: true
+walkable: true

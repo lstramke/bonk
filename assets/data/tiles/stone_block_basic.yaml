@@ -1,0 +1,7 @@
+id: stone_block_basic
+name: Stone Block
+
+sprite: sprites/tiles/stone_block_basic.png
+
+destructible: true
+walkable: true

@@ -1,0 +1,7 @@
+id: grass_block_basic
+name: Grass Block
+
+sprite: sprites/tiles/grass_block_basic.png
+
+destructible: true
+walkable: true

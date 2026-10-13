@@ -1,0 +1,13 @@
+id: lootbox
+name: Lootbox Block
+
+sprite: sprites/tiles/lootbox_block.png
+
+destructible: false
+walkable: true
+
+events:
+  - trigger: hit_from_below
+    action: drop_item
+    event_sprite: sprites/tiles/lootbox_block_empty.png
+    cooldown: 8.0

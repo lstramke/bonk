@@ -13,14 +13,23 @@ Dieses Dokument definiert die grundlegende Ordnerstruktur und Organisation der A
 - Asset-Abmessungen und Pixelformate sollen innerhalb eines Asset-Typs konsistent sein.
 - Asset-Dateien müssen in einem Format vorliegen, das zur vorgesehenen Lade- und Rendering-Pipeline passt.
 
+### Dimensions in px
+
+Charakter-Sprites: 32×32
+
+Map-Tiles: 32×32
+
+Map-Größe: 64×64 Tiles Maximal
+
+Gesamte Map: 2048×2048 Pixel
 
 ## Asset Directory Structure
 
 ```text
 assets/
 ├── maps/
-│   └── <map-id>/
-│       └── map.yaml
+│   └── <map-id>.yaml
+│   └── ...
 │
 ├── sprites/
 │   ├── backgrounds/
@@ -51,7 +60,7 @@ assets/
 
 ## Directory Responsibilities
 
-* `maps/`: Map-Definitionen und zugehörige Map-Daten.
+* `maps/`: Map-Definitionen
 * `sprites/`: Visuelle Assets wie Hintergründe, Tiles, Charaktere, Items und Effekte.
 * `sounds/`: Soundeffekte.
 * `music/`: Musikdateien.

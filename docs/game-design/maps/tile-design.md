@@ -18,7 +18,7 @@ destructible: false
 walkable: true
 
 events:
-  - trigger: interact
+  - trigger: hit_from_below
     action: drop_item
     event_sprite: sprites/tiles/lootbox_block_open.png
     cooldown: 1.0
@@ -47,7 +47,7 @@ Es kann ein extra sprite dafür hinterlegt werden.
 
 ### Unterstützte Trigger
 
-* `interact`: Wird ausgelöst, wenn der Spieler mit dem Tile interagiert.
+* `hit_from_below`: Wird ausgelöst, wenn der Spieler von unten gegen das Tile springt.
 * `destroy`: Wird ausgelöst, wenn das Tile zerstört wird.
 
 ### Unterstützte Actions
