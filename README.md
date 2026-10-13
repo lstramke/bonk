@@ -31,7 +31,7 @@ game simulation and networking code.
 
 ## Build and run
 
-With Odin and raylib installed:
+With Odin and raylib installed, run the following commands from the project root directory (`bonk/`):
 
 ```sh
 odin build src -out:bin/bonk
