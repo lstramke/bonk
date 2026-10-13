@@ -1,4 +1,3 @@
-
 package main
 
 import "core:fmt"
@@ -8,13 +7,34 @@ main :: proc() {
 	rl.InitWindow(1280, 704, "B.O.N.K.")
 	defer rl.CloseWindow()
 
+	frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
+	if !rl.IsTextureReady(frank_texture) {
+		rl.UnloadTexture(frank_texture)
+		frank_texture = rl.LoadTexture("../assets/sprites/characters/frank.png")
+	}
+	defer rl.UnloadTexture(frank_texture)
+
+	if !rl.IsTextureValid(frank_texture) {
+	    fmt.println("ERROR: Frank texture could not be loaded!")
+	    return
+	}
+
+	fmt.printf("INFO: Frank texture loaded: %d x %d\n",
+	    frank_texture.width,
+	    frank_texture.height,
+	)
+
+	frame_width := 32
+	frame_height := 32
+	frame_count := int(frank_texture.width) / frame_width
+	frame_index := 0
+	frame_timer: f32 = 0
+	frame_duration: f32 = 0.15
+
 	rl.SetTargetFPS(60)
 
 	background_texture := rl.LoadTexture("assets/sprites/backgrounds/grassland.png")
 	defer rl.UnloadTexture(background_texture)
-
-	//frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
-	//defer rl.UnloadTexture(frank_texture)
 
 	stone_texture := rl.LoadTexture("assets/sprites/tiles/stone_block_basic.png")
 	defer rl.UnloadTexture(stone_texture)
@@ -38,10 +58,6 @@ main :: proc() {
 	    return
 	}
 
-	//if !rl.IsTextureValid(frank_texture) {
-	//	fmt.println("ERROR: Frank texture could not be loaded!")
-	//	return
-	//}
 	if !rl.IsTextureValid(stone_texture) {
 		fmt.println("ERROR: Stone tile could not be loaded!")
 		return
@@ -65,13 +81,32 @@ main :: proc() {
 	start_y: f32 = 280.0
 
 	frank_scale: f32 = 3.0
-	//frank_width := f32(frank_texture.width) * frank_scale
-	//frank_height := f32(frank_texture.height) * frank_scale
+	frank_width := f32(frank_texture.width) * frank_scale
+	frank_height := f32(frank_texture.height) * frank_scale
 	middle_x := start_x + 2.0 * tile_size
-	//frank_x := middle_x + (tile_size - frank_width) / 2.0
-	//frank_y := start_y - frank_height
+	frank_x := middle_x + (tile_size - frank_width) / 2.0
+	frank_y := start_y - frank_height
 
 	for !rl.WindowShouldClose() {
+		frame_timer += rl.GetFrameTime()
+		if frame_timer >= frame_duration {
+			frame_timer -= frame_duration
+			frame_index = (frame_index + 1) % frame_count
+		}
+
+		source := rl.Rectangle{
+			x = f32(frame_index * frame_width),
+			y = 0,
+			width = f32(frame_width),
+			height = f32(frame_height),
+		}
+		destination := rl.Rectangle{
+			x = 384,
+			y = 290,
+			width = f32(frame_width) * 3,
+			height = f32(frame_height) * 3,
+		}
+
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.RAYWHITE)
 
@@ -123,30 +158,30 @@ main :: proc() {
 			)
 		}
 
-		//frank_x += 1
-		//// Frank vor der Landschaft zeichnen
-		//rl.DrawTextureEx(
-		//	frank_texture,
-		//	{frank_x, frank_y},
-		//	0.0,
-		//	frank_scale,
-		//	rl.WHITE,
-		//)
+		frank_x += 1
+		// Frank vor der Landschaft zeichnen
+		rl.DrawTextureEx(
+			frank_texture,
+			{frank_x, frank_y},
+			0.0,
+			frank_scale,
+			rl.WHITE,
+		)
 
 
-		//empty_y := frank_y - tile_size
+		empty_y := frank_y - tile_size
 
 		// Lootbox direkt über dem leeren Block
-		//lootbox_x := middle_x
-		//lootbox_y := empty_y - tile_size
-//
-		//rl.DrawTextureEx(
-		//    lootbox_texture,
-		//    {lootbox_x, lootbox_y},
-		//    0.0,
-		//    tile_size / f32(lootbox_texture.width),
-		//    rl.RAYWHITE,
-		//)
+		lootbox_x := middle_x
+		lootbox_y := empty_y - tile_size
+
+		rl.DrawTextureEx(
+		    lootbox_texture,
+		    {lootbox_x, lootbox_y},
+		    0.0,
+		    tile_size / f32(lootbox_texture.width),
+		    rl.RAYWHITE,
+		)
 
 		rl.EndDrawing()
 	}

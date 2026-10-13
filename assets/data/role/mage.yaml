@@ -1,0 +1,19 @@
+id: mage
+display_name: Mages
+description: Ranged magic focused role.
+
+loot_preferences:
+  weapons:
+    melee:
+      physical: 0.75
+      magic: 0.75
+    range:
+      physical: 1.0
+      magic: 2.0
+    explosive:
+      physical: 1.0
+      magic: 1.0
+  armor:
+    physical: 1.25
+    magic: 1.0
+  potions: 1.0

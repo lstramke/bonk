@@ -1,0 +1,22 @@
+stats:
+  movement_speed: 180
+  health: 100
+  health_regeneration: 0
+  armor:
+    physical: 0
+    magic: 0
+  damage_modifiers:
+    melee:
+      physical: 1.0
+      magic: 1.0
+    range:
+      physical: 1.0
+      magic: 1.0
+    explosive:
+      physical: 1.0
+      magic: 1.0
+abilities:
+  passive: []
+
+equipment:
+  starting_items: []

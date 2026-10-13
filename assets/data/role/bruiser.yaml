@@ -1,0 +1,19 @@
+id: bruiser
+display_name: Bruiser
+description: Close-combat focused role.
+
+loot_preferences:
+  weapons:
+    melee:
+      physical: 2.0
+      magic: 1.0
+    range:
+      physical: 1.0
+      magic: 1.0
+    explosive:
+      physical: 1.0
+      magic: 1.0
+  armor:
+    physical: 1.25
+    magic: 1.0
+  potions: 1.0
