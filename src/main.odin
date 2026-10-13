@@ -5,8 +5,13 @@ import "core:fmt"
 import rl "vendor:raylib"
 
 main :: proc() {
-	rl.InitWindow(800, 450, "B.O.N.K.")
+	rl.InitWindow(1280, 704, "B.O.N.K.")
 	defer rl.CloseWindow()
+
+	rl.SetTargetFPS(60)
+
+	background_texture := rl.LoadTexture("assets/sprites/backgrounds/grassland.png")
+	defer rl.UnloadTexture(background_texture)
 
 	frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
 	defer rl.UnloadTexture(frank_texture)
@@ -22,6 +27,11 @@ main :: proc() {
 
 	lootbox_texture := rl.LoadTexture("assets/sprites/tiles/lootbox_block.png")
 	defer rl.UnloadTexture(lootbox_texture)
+
+	if !rl.IsTextureValid(background_texture) {
+    	fmt.println("ERROR: Background texture could not be loaded!")
+    	return
+	}
 
 	if !rl.IsTextureValid(lootbox_texture) {
 	    fmt.println("ERROR: Lootbox texture could not be loaded!")
@@ -45,10 +55,13 @@ main :: proc() {
 		return
 	}
 
+	scale_x := 1280.0 / f32(background_texture.width)
+	scale_y := 704.0 / f32(background_texture.height)
+
 	tile_size: f32 = 32.0
 	cols := 4
 
-	start_x :f32= 320.0
+	start_x :f32= 0.0
 	start_y: f32 = 280.0
 
 	frank_scale: f32 = 3.0
@@ -62,11 +75,19 @@ main :: proc() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.RAYWHITE)
 
+		rl.DrawTextureEx(
+		    background_texture,
+		    {0, 0},
+		    0.0,
+		    scale_x,
+		    rl.WHITE,
+		)
+
 		rl.DrawText("B.O.N.K.", 320, 40, 48, rl.DARKGRAY)
 		rl.DrawText("Odin + raylib", 330, 95, 20, rl.GRAY)
 
 		// Reihe 1: vier Steine
-		for col in 0 ..< 5 {
+		for col in 0 ..< 41 {
 			x := start_x + f32(col)*tile_size
 			y := start_y + 3.0*tile_size
 			rl.DrawTextureEx(stone_texture, {x, y}, 0.0,
@@ -74,29 +95,21 @@ main :: proc() {
 		}
 
 		// Reihe 2: vier Erde-Tiles
-		for col in 0 ..< 5 {
+		for col in 0 ..< 41 {
 			x := start_x + f32(col)*tile_size
 			y := start_y + 2.0*tile_size
 			rl.DrawTextureEx(dirt_texture, {x, y}, 0.0,
 				tile_size/f32(dirt_texture.width), rl.WHITE)
 		}
 
-		// Reihe 3: Gras, Erde, Erde, Erde, Gras
-		for col in 0 ..< 5 {
+		// Reihe 3: Gras
+		for col in 0 ..< 41 {
 			x := start_x + f32(col)*tile_size
 			y := start_y + tile_size
-		
-			if col == 0 || col == 4 {
-				rl.DrawTextureEx(
-					grass_texture, {x, y}, 0.0,
-					tile_size/f32(grass_texture.width), rl.WHITE,
-				)
-			} else {
-				rl.DrawTextureEx(
-					dirt_texture, {x, y}, 0.0,
-					tile_size/f32(dirt_texture.width), rl.WHITE,
-				)
-			}
+			rl.DrawTextureEx(
+				grass_texture, {x, y}, 0.0,
+				tile_size/f32(dirt_texture.width), rl.WHITE,
+			)
 		}
 
 		// Reihe 4: zwei Gras-Tiles in der Mitte
@@ -110,6 +123,7 @@ main :: proc() {
 			)
 		}
 
+		frank_x += 1
 		// Frank vor der Landschaft zeichnen
 		rl.DrawTextureEx(
 			frank_texture,
@@ -119,17 +133,8 @@ main :: proc() {
 			rl.WHITE,
 		)
 
-		// Leerer Block direkt über Frank
-		empty_x := middle_x
-		empty_y := frank_y - tile_size
 
-		rl.DrawRectangle(
-		    i32(empty_x),
-		    i32(empty_y),
-		    i32(tile_size),
-		    i32(tile_size),
-		    rl.RAYWHITE,
-		)
+		empty_y := frank_y - tile_size
 
 		// Lootbox direkt über dem leeren Block
 		lootbox_x := middle_x

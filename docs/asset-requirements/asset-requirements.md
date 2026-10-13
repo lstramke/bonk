@@ -19,7 +19,7 @@ Charakter-Sprites: 32×32
 
 Map-Tiles: 32×32
 
-Map-Größe: 64×64 Tiles
+Map-Größe: 64×64 Tiles Maximal
 
 Gesamte Map: 2048×2048 Pixel
 
@@ -28,8 +28,8 @@ Gesamte Map: 2048×2048 Pixel
 ```text
 assets/
 ├── maps/
-│   └── <map-id>/
-│       └── map.yaml
+│   └── <map-id>.yaml
+│   └── ...
 │
 ├── sprites/
 │   ├── backgrounds/
@@ -60,7 +60,7 @@ assets/
 
 ## Directory Responsibilities
 
-* `maps/`: Map-Definitionen und zugehörige Map-Daten.
+* `maps/`: Map-Definitionen
 * `sprites/`: Visuelle Assets wie Hintergründe, Tiles, Charaktere, Items und Effekte.
 * `sounds/`: Soundeffekte.
 * `music/`: Musikdateien.

@@ -68,7 +68,7 @@ events: []
 
 Map-Assets werden zentral unter `assets/` organisiert.
 
-* `assets/maps/`: Map-Definitionen und zugehörige Map-Dateien.
+* `assets/maps/`: Map-Definitionen
 * `assets/sprites/tiles/`: Sprites für Tiles und Blöcke.
 * `assets/sprites/characters/`: Sprites für Charaktere.
 * `assets/sprites/items/`: Sprites für Items.
