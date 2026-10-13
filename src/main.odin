@@ -24,16 +24,43 @@ main :: proc() {
 	    frank_texture.height,
 	)
 
+	frame_width := 32
+	frame_height := 32
+	frame_count := int(frank_texture.width) / frame_width
+	frame_index := 0
+	frame_timer: f32 = 0
+	frame_duration: f32 = 0.15
+
 	for !rl.WindowShouldClose() {
+		frame_timer += rl.GetFrameTime()
+		if frame_timer >= frame_duration {
+			frame_timer -= frame_duration
+			frame_index = (frame_index + 1) % frame_count
+		}
+
+		source := rl.Rectangle{
+			x = f32(frame_index * frame_width),
+			y = 0,
+			width = f32(frame_width),
+			height = f32(frame_height),
+		}
+		destination := rl.Rectangle{
+			x = 384,
+			y = 290,
+			width = f32(frame_width) * 3,
+			height = f32(frame_height) * 3,
+		}
+
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.RAYWHITE)
 		rl.DrawText("B.O.N.K.", 320, 190, 48, rl.DARKGRAY)
 		rl.DrawText("Odin + raylib", 330, 250, 20, rl.GRAY)
-		rl.DrawTextureEx(
+		rl.DrawTexturePro(
 		    frank_texture,
-		    {384, 290},
+		    source,
+		    destination,
+		    {0, 0},
 		    0,
-		    3.0,
 		    rl.WHITE,
 		)
 		rl.EndDrawing()

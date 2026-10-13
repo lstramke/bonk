@@ -65,6 +65,8 @@ Jede Charakterdatei muss mindestens folgende Bereiche enthalten:
 
 ### Character File Example
 
+Beim überarbeiten der Charaktere, wird sich nochmal der "animations" - Reiter genauer angeguckt, wie was gebraucht wird
+
 ```yaml
 id: character_id
 display_name: Character Name

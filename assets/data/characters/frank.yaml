@@ -42,12 +42,12 @@ assets:
   icon: 
   portrait: 
   animations:
-    idle: idle
+    #idle: idle
     run: run
-    jump: jump
-    fall: fall
+    #jump: jump
+    #fall: fall
     crouch: crouch
-    hurt: hurt
+    #hurt: hurt
     death: death
   audio:
     footsteps: 
