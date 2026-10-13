@@ -13,8 +13,8 @@ main :: proc() {
 	background_texture := rl.LoadTexture("assets/sprites/backgrounds/grassland.png")
 	defer rl.UnloadTexture(background_texture)
 
-	frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
-	defer rl.UnloadTexture(frank_texture)
+	//frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
+	//defer rl.UnloadTexture(frank_texture)
 
 	stone_texture := rl.LoadTexture("assets/sprites/tiles/stone_block_basic.png")
 	defer rl.UnloadTexture(stone_texture)
@@ -38,10 +38,10 @@ main :: proc() {
 	    return
 	}
 
-	if !rl.IsTextureValid(frank_texture) {
-		fmt.println("ERROR: Frank texture could not be loaded!")
-		return
-	}
+	//if !rl.IsTextureValid(frank_texture) {
+	//	fmt.println("ERROR: Frank texture could not be loaded!")
+	//	return
+	//}
 	if !rl.IsTextureValid(stone_texture) {
 		fmt.println("ERROR: Stone tile could not be loaded!")
 		return
@@ -61,15 +61,15 @@ main :: proc() {
 	tile_size: f32 = 32.0
 	cols := 4
 
-	start_x :f32= 0.0
+	start_x: f32 = 0.0
 	start_y: f32 = 280.0
 
 	frank_scale: f32 = 3.0
-	frank_width := f32(frank_texture.width) * frank_scale
-	frank_height := f32(frank_texture.height) * frank_scale
+	//frank_width := f32(frank_texture.width) * frank_scale
+	//frank_height := f32(frank_texture.height) * frank_scale
 	middle_x := start_x + 2.0 * tile_size
-	frank_x := middle_x + (tile_size - frank_width) / 2.0
-	frank_y := start_y - frank_height
+	//frank_x := middle_x + (tile_size - frank_width) / 2.0
+	//frank_y := start_y - frank_height
 
 	for !rl.WindowShouldClose() {
 		rl.BeginDrawing()
@@ -123,30 +123,30 @@ main :: proc() {
 			)
 		}
 
-		frank_x += 1
-		// Frank vor der Landschaft zeichnen
-		rl.DrawTextureEx(
-			frank_texture,
-			{frank_x, frank_y},
-			0.0,
-			frank_scale,
-			rl.WHITE,
-		)
+		//frank_x += 1
+		//// Frank vor der Landschaft zeichnen
+		//rl.DrawTextureEx(
+		//	frank_texture,
+		//	{frank_x, frank_y},
+		//	0.0,
+		//	frank_scale,
+		//	rl.WHITE,
+		//)
 
 
-		empty_y := frank_y - tile_size
+		//empty_y := frank_y - tile_size
 
 		// Lootbox direkt über dem leeren Block
-		lootbox_x := middle_x
-		lootbox_y := empty_y - tile_size
-
-		rl.DrawTextureEx(
-		    lootbox_texture,
-		    {lootbox_x, lootbox_y},
-		    0.0,
-		    tile_size / f32(lootbox_texture.width),
-		    rl.RAYWHITE,
-		)
+		//lootbox_x := middle_x
+		//lootbox_y := empty_y - tile_size
+//
+		//rl.DrawTextureEx(
+		//    lootbox_texture,
+		//    {lootbox_x, lootbox_y},
+		//    0.0,
+		//    tile_size / f32(lootbox_texture.width),
+		//    rl.RAYWHITE,
+		//)
 
 		rl.EndDrawing()
 	}
