@@ -7,6 +7,12 @@ main :: proc() {
 	rl.InitWindow(1280, 704, "B.O.N.K.")
 	defer rl.CloseWindow()
 
+	trink_potion_texture := rl.LoadTexture("assets/sprites/items/potions/heal_drink_potion.png")
+	defer rl.UnloadTexture(trink_potion_texture)
+
+	throw_potion_texture := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion.png")
+	defer rl.UnloadTexture(throw_potion_texture)
+
 	frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
 	if !rl.IsTextureReady(frank_texture) {
 		rl.UnloadTexture(frank_texture)
@@ -159,6 +165,10 @@ main :: proc() {
 		}
 
 		frank_x += 1
+
+		if frank_x > 1280 {
+			frank_x = 0
+		}
 		// Frank vor der Landschaft zeichnen
 		rl.DrawTextureEx(
 			frank_texture,
@@ -166,6 +176,22 @@ main :: proc() {
 			0.0,
 			frank_scale,
 			rl.WHITE,
+		)
+
+		rl.DrawTextureEx(
+			trink_potion_texture,
+			{frank_x-12, frank_y+12},
+			0.0,
+			1.0,
+			rl.WHITE
+		)
+
+		rl.DrawTextureEx(
+			throw_potion_texture,
+			{frank_x-30, frank_y-30},
+			0.0,
+			1.0,
+			rl.WHITE
 		)
 
 
