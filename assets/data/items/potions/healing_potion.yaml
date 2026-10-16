@@ -1,4 +1,4 @@
-id: heal_potion
+id: healing_potion
 display_name: Heiltrank
 description: Stellt nach dem Trinken verlorene Lebenspunkte wieder her.
 type: drink
@@ -12,8 +12,8 @@ stats:
         amount: 40
 
 assets:
-  sprite: sprites/items/potions/heal_drink_potion.png
+  sprite: sprites/items/potions/healing_drink_potion.png
   animation:
-    use: sprites/items/potions/heal_drink_potion_use_sheet.png
+    use: sprites/items/potions/healing_drink_potion_use_sheet.png
   audio:
     use:
