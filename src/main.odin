@@ -10,6 +10,18 @@ main :: proc() {
 	trink_potion_texture := rl.LoadTexture("assets/sprites/items/potions/heal_drink_potion.png")
 	defer rl.UnloadTexture(trink_potion_texture)
 
+	heal_drink_animation := rl.LoadTexture("assets/sprites/items/potions/heal_drink_potion_use_sheet.png")
+	defer rl.UnloadTexture(heal_drink_animation)
+
+	potion_frame_width := 32
+	potion_frame_height := 32
+	potion_frame_count := int(heal_drink_animation.width) / potion_frame_width
+
+	potion_frame_index := 0
+	potion_frame_timer: f32 = -10
+	potion_frame_duration: f32 = 0.1
+	potion_animation_finished := false
+
 	throw_potion_texture := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion.png")
 	defer rl.UnloadTexture(throw_potion_texture)
 
@@ -83,7 +95,7 @@ main :: proc() {
 	tile_size: f32 = 32.0
 	cols := 4
 
-	start_x: f32 = 0.0
+	start_x: f32 = 100.0
 	start_y: f32 = 280.0
 
 	frank_scale: f32 = 3.0
@@ -111,6 +123,20 @@ main :: proc() {
 			y = 290,
 			width = f32(frame_width) * 3,
 			height = f32(frame_height) * 3,
+		}
+
+		if !potion_animation_finished {
+		    potion_frame_timer += rl.GetFrameTime()
+
+		    if potion_frame_timer >= potion_frame_duration {
+		        potion_frame_timer -= potion_frame_duration
+
+		        if potion_frame_index < potion_frame_count - 1 {
+		            potion_frame_index += 1
+		        } else {
+		            potion_animation_finished = true
+		        }
+		    }
 		}
 
 		rl.BeginDrawing()
@@ -178,12 +204,27 @@ main :: proc() {
 			rl.WHITE,
 		)
 
-		rl.DrawTextureEx(
-			trink_potion_texture,
-			{frank_x-12, frank_y+12},
-			0.0,
-			1.0,
-			rl.WHITE
+		potion_source := rl.Rectangle{
+		    x = f32(potion_frame_index * potion_frame_width),
+		    y = 0,
+		    width = f32(potion_frame_width),
+		    height = f32(potion_frame_height),
+		}
+
+		potion_destination := rl.Rectangle{
+		    x = frank_x - 12,
+		    y = frank_y + 12,
+		    width = f32(potion_frame_width),
+		    height = f32(potion_frame_height),
+		}
+
+		rl.DrawTexturePro(
+		    heal_drink_animation,
+		    potion_source,
+		    potion_destination,
+		    {0, 0},
+		    0.0,
+		    rl.WHITE,
 		)
 
 		rl.DrawTextureEx(

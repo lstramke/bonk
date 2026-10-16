@@ -1,0 +1,5 @@
+id: instant_heal
+type: heal
+
+defaults:
+  amount: 25
