@@ -10,7 +10,7 @@ main :: proc() {
 	trink_potion_texture := rl.LoadTexture("assets/sprites/items/potions/heal_drink_potion.png")
 	defer rl.UnloadTexture(trink_potion_texture)
 
-	heal_drink_animation := rl.LoadTexture("assets/sprites/items/potions/heal_drink_potion_use_sheet.png")
+	heal_drink_animation := rl.LoadTexture("assets/sprites/items/potions/healing_drink_potion_use_sheet.png")
 	defer rl.UnloadTexture(heal_drink_animation)
 
 	potion_frame_width := 32
@@ -24,6 +24,16 @@ main :: proc() {
 
 	throw_potion_texture := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion.png")
 	defer rl.UnloadTexture(throw_potion_texture)
+
+	slow_use_animation := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion_use_sheet.png")
+	defer rl.UnloadTexture(slow_use_animation)
+
+	slow_potion_frame_count := int(slow_use_animation.width) / potion_frame_width
+	slow_potion_frame_index := 0
+	slow_potion_frame_timer: f32 = -10
+	slow_potion_frame_duration: f32 = 0.4
+	slow_potion_animation_finished := false
+
 
 	frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
 	if !rl.IsTextureReady(frank_texture) {
@@ -95,14 +105,14 @@ main :: proc() {
 	tile_size: f32 = 32.0
 	cols := 4
 
-	start_x: f32 = 100.0
+	start_x: f32 = 0.0
 	start_y: f32 = 280.0
 
 	frank_scale: f32 = 3.0
 	frank_width := f32(frank_texture.width) * frank_scale
 	frank_height := f32(frank_texture.height) * frank_scale
 	middle_x := start_x + 2.0 * tile_size
-	frank_x := middle_x + (tile_size - frank_width) / 2.0
+	frank_x := middle_x + 100.0 + (tile_size - frank_width) / 2.0
 	frank_y := start_y - frank_height
 
 	for !rl.WindowShouldClose() {
@@ -110,19 +120,6 @@ main :: proc() {
 		if frame_timer >= frame_duration {
 			frame_timer -= frame_duration
 			frame_index = (frame_index + 1) % frame_count
-		}
-
-		source := rl.Rectangle{
-			x = f32(frame_index * frame_width),
-			y = 0,
-			width = f32(frame_width),
-			height = f32(frame_height),
-		}
-		destination := rl.Rectangle{
-			x = 384,
-			y = 290,
-			width = f32(frame_width) * 3,
-			height = f32(frame_height) * 3,
 		}
 
 		if !potion_animation_finished {
@@ -137,6 +134,20 @@ main :: proc() {
 		            potion_animation_finished = true
 		        }
 		    }
+		}
+
+		if ! slow_potion_animation_finished {
+			slow_potion_frame_timer += rl.GetFrameTime()
+
+			if slow_potion_frame_timer >= slow_potion_frame_duration {
+				slow_potion_frame_timer -= slow_potion_frame_duration
+
+				if slow_potion_frame_index < slow_potion_frame_count - 1 {
+					slow_potion_frame_index += 1
+				} else {
+					slow_potion_animation_finished = true
+				}
+			}
 		}
 
 		rl.BeginDrawing()
@@ -227,11 +238,26 @@ main :: proc() {
 		    rl.WHITE,
 		)
 
-		rl.DrawTextureEx(
-			throw_potion_texture,
-			{frank_x-30, frank_y-30},
+		slow_potion_source := rl.Rectangle{
+		    x = f32(slow_potion_frame_index * potion_frame_width),
+		    y = 0,
+		    width = f32(potion_frame_width),
+		    height = f32(potion_frame_height),
+		}
+
+		slow_potion_destination := rl.Rectangle{
+		    x = frank_x - 30,
+		    y = frank_y - 30,
+		    width = f32(potion_frame_width),
+		    height = f32(potion_frame_height),
+		}
+
+		rl.DrawTexturePro(
+			slow_use_animation,
+			slow_potion_source,
+			slow_potion_destination,
+			{0, 0},
 			0.0,
-			1.0,
 			rl.WHITE
 		)
 
