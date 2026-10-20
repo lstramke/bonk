@@ -1,5 +1,5 @@
 id: healing_potion
-display_name: Heiltrank
+display_name: Trank der Heilung
 description: Stellt nach dem Trinken verlorene Lebenspunkte wieder her.
 type: drink
 

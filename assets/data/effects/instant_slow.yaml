@@ -1,0 +1,12 @@
+id: instant_slow
+type: movement_speed
+
+defaults:
+  multiplier: 0.5
+  duration: 4.0
+
+assets:
+  status_sprite:
+  audio:
+    apply:
+    expire:

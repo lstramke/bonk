@@ -3,3 +3,8 @@ type: heal
 
 defaults:
   amount: 25
+
+assets:
+  status_sprite:
+  audio:
+    apply:
