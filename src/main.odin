@@ -7,6 +7,37 @@ main :: proc() {
 	rl.InitWindow(1280, 704, "B.O.N.K.")
 	defer rl.CloseWindow()
 
+	trink_potion_texture := rl.LoadTexture("assets/sprites/items/potions/heal_drink_potion.png")
+	defer rl.UnloadTexture(trink_potion_texture)
+
+	heal_drink_animation := rl.LoadTexture("assets/sprites/items/potions/healing_drink_potion_use_sheet.png")
+	defer rl.UnloadTexture(heal_drink_animation)
+
+	potion_frame_width := 32
+	potion_frame_height := 32
+	potion_frame_count := int(heal_drink_animation.width) / potion_frame_width
+
+	potion_frame_index := 0
+	potion_frame_timer: f32 = -10
+	potion_frame_duration: f32 = 0.1
+	potion_animation_finished := false
+
+	throw_potion_texture := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion.png")
+	defer rl.UnloadTexture(throw_potion_texture)
+
+	slow_use_animation := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion_use_sheet.png")
+	defer rl.UnloadTexture(slow_use_animation)
+
+	slow_impact_animation := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion_impact_sheet.png")
+	defer rl.UnloadTexture(slow_impact_animation)
+
+	slow_potion_frame_count := int(slow_impact_animation.width) / potion_frame_width
+	slow_potion_frame_index := 0
+	slow_potion_frame_timer: f32 = -10
+	slow_potion_frame_duration: f32 = 0.1
+	slow_potion_animation_finished := false
+
+
 	frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
 	if !rl.IsTextureReady(frank_texture) {
 		rl.UnloadTexture(frank_texture)
@@ -84,7 +115,7 @@ main :: proc() {
 	frank_width := f32(frank_texture.width) * frank_scale
 	frank_height := f32(frank_texture.height) * frank_scale
 	middle_x := start_x + 2.0 * tile_size
-	frank_x := middle_x + (tile_size - frank_width) / 2.0
+	frank_x := middle_x + 100.0 + (tile_size - frank_width) / 2.0
 	frank_y := start_y - frank_height
 
 	for !rl.WindowShouldClose() {
@@ -94,17 +125,32 @@ main :: proc() {
 			frame_index = (frame_index + 1) % frame_count
 		}
 
-		source := rl.Rectangle{
-			x = f32(frame_index * frame_width),
-			y = 0,
-			width = f32(frame_width),
-			height = f32(frame_height),
+		if !potion_animation_finished {
+		    potion_frame_timer += rl.GetFrameTime()
+
+		    if potion_frame_timer >= potion_frame_duration {
+		        potion_frame_timer -= potion_frame_duration
+
+		        if potion_frame_index < potion_frame_count - 1 {
+		            potion_frame_index += 1
+		        } else {
+		            potion_animation_finished = true
+		        }
+		    }
 		}
-		destination := rl.Rectangle{
-			x = 384,
-			y = 290,
-			width = f32(frame_width) * 3,
-			height = f32(frame_height) * 3,
+
+		if ! slow_potion_animation_finished {
+			slow_potion_frame_timer += rl.GetFrameTime()
+
+			if slow_potion_frame_timer >= slow_potion_frame_duration {
+				slow_potion_frame_timer -= slow_potion_frame_duration
+
+				if slow_potion_frame_index < slow_potion_frame_count - 1 {
+					slow_potion_frame_index += 1
+				} else {
+					slow_potion_animation_finished = true
+				}
+			}
 		}
 
 		rl.BeginDrawing()
@@ -159,6 +205,10 @@ main :: proc() {
 		}
 
 		frank_x += 1
+
+		if frank_x > 1280 {
+			frank_x = 0
+		}
 		// Frank vor der Landschaft zeichnen
 		rl.DrawTextureEx(
 			frank_texture,
@@ -166,6 +216,52 @@ main :: proc() {
 			0.0,
 			frank_scale,
 			rl.WHITE,
+		)
+
+		potion_source := rl.Rectangle{
+		    x = f32(potion_frame_index * potion_frame_width),
+		    y = 0,
+		    width = f32(potion_frame_width),
+		    height = f32(potion_frame_height),
+		}
+
+		potion_destination := rl.Rectangle{
+		    x = frank_x - 12,
+		    y = frank_y + 12,
+		    width = f32(potion_frame_width),
+		    height = f32(potion_frame_height),
+		}
+
+		rl.DrawTexturePro(
+		    heal_drink_animation,
+		    potion_source,
+		    potion_destination,
+		    {0, 0},
+		    0.0,
+		    rl.WHITE,
+		)
+
+		slow_potion_source := rl.Rectangle{
+		    x = f32(slow_potion_frame_index * potion_frame_width),
+		    y = 0,
+		    width = f32(potion_frame_width),
+		    height = f32(potion_frame_height),
+		}
+
+		slow_potion_destination := rl.Rectangle{
+		    x = frank_x - 30,
+		    y = frank_y - 30,
+		    width = f32(potion_frame_width),
+		    height = f32(potion_frame_height),
+		}
+
+		rl.DrawTexturePro(
+			slow_impact_animation,
+			slow_potion_source,
+			slow_potion_destination,
+			{0, 0},
+			0.0,
+			rl.WHITE
 		)
 
 

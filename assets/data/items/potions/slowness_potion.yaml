@@ -1,0 +1,31 @@
+id: slowness_potion
+display_name: Trank der Verlangsamung
+description: Verursacht bei Kontakt eine prozentualle Verrringerung der Bewegungsgeschwindigkeit.
+type: throw
+
+stats:
+  use_time: 1.0
+  target: area
+
+  projectile:
+    speed: 450
+    lifetime: 1.5
+    hitbox:
+      type: circle
+      radius: 30
+    trajectory: ballistic
+
+  effects:
+    - id: instant_slow
+      area:
+        type: circle
+        radius: 60
+
+assets:
+  sprite: sprites/items/potions/slow_throw_potion.png
+  animation:
+    use: sprites/items/potions/slow_throw_potion_use_sheet.png
+    impact: sprites/items/potions/slow_throw_potion_impact_sheet.png
+  audio:
+    use:
+    impact:

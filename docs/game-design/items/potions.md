@@ -43,10 +43,11 @@ stats:
         amount: 40
 
 assets:
-  world_sprite: sprites/items/potions/healing-potion.png
-  hand_sprite: sprites/items/potions/healing-potion-hand.png
+  sprite: sprites/items/potions/healing_potion.png
+  animation:
+    use: sprites/items/potions/healing_potion_use.png
   audio:
-    use: sounds/potions/healing-potion-use.wav
+    use: sounds/potions/healing_potion_use.wav
 ```
 
 ## Throwing Potion Example
@@ -79,9 +80,10 @@ stats:
         radius: 60
 
 assets:
-  world_sprite: sprites/items/potions/slow-flask.png
-  hand_sprite: sprites/items/potions/slow-flask-hand.png
-  projectile_sprite: sprites/projectiles/slow-flask.png
+  sprite: sprites/items/potions/slow-flask.png
+  animation:
+    use: sprites/items/potions/slow_flask_use.png
+    impact: sprites/items/potions/slow_flask_hit.png
   audio:
     use: sounds/potions/slow-flask-use.wav
     impact: sounds/potions/slow-flask-impact.wav
@@ -108,9 +110,9 @@ Die Dauer eines Effekts ist unabhängig von der Flugzeit des Projektils.
 
 Jeder Trank definiert seine eigenen Item-Assets:
 
-- `assets.world_sprite`: Sprite in der Spielwelt.
-- `assets.hand_sprite`: Sprite in der Hand.
-- `assets.projectile_sprite`: Projektilsprite, erforderlich für `throw`.
+- `assets.sprite`: Sprite in der Spielwelt.
+- `assets.animation.use`: Verwendungsanimation, ein Trinken beim type drink, ein Wurf bei type throw.
+- `assets.animation.flying`: Animation nach dem Abwurf beim type throw.
 - `assets.audio.use`: Sound bei der Benutzung, für alle Tränke erforderlich.
 - `assets.audio.impact`: Sound beim Aufprall, erforderlich für `throw`.
 
