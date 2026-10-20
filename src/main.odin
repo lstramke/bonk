@@ -28,10 +28,13 @@ main :: proc() {
 	slow_use_animation := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion_use_sheet.png")
 	defer rl.UnloadTexture(slow_use_animation)
 
-	slow_potion_frame_count := int(slow_use_animation.width) / potion_frame_width
+	slow_impact_animation := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion_impact_sheet.png")
+	defer rl.UnloadTexture(slow_impact_animation)
+
+	slow_potion_frame_count := int(slow_impact_animation.width) / potion_frame_width
 	slow_potion_frame_index := 0
 	slow_potion_frame_timer: f32 = -10
-	slow_potion_frame_duration: f32 = 0.4
+	slow_potion_frame_duration: f32 = 0.1
 	slow_potion_animation_finished := false
 
 
@@ -253,7 +256,7 @@ main :: proc() {
 		}
 
 		rl.DrawTexturePro(
-			slow_use_animation,
+			slow_impact_animation,
 			slow_potion_source,
 			slow_potion_destination,
 			{0, 0},

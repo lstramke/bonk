@@ -83,18 +83,7 @@ assets:
   sprite: sprites/items/potions/slow-flask.png
   animation:
     use: sprites/items/potions/slow_flask_use.png
-    animation:
-    flying:
-      sprite_sheet: sprites/items/potions/slow_flask_flying.png
-      states:
-        flying:
-          frames: [0, 1, 2]
-          frame_duration: 0.1
-          loop: true
-        hit:
-          frames: [3, 4, 5]
-          frame_duration: 0.08
-          loop: false
+    impact: sprites/items/potions/slow_flask_hit.png
   audio:
     use: sounds/potions/slow-flask-use.wav
     impact: sounds/potions/slow-flask-impact.wav
