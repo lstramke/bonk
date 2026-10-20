@@ -1,0 +1,29 @@
+id: magic_orb
+display_name: Magic Orb
+description: Launches a straight magical projectile.
+type: range
+damage_type:
+  - magic
+
+stats:
+  damage:
+    magic: 28
+  attack:
+    mode: single
+    cooldown: 0.8
+    use_time: 0
+  projectile:
+    speed: 320
+    hitbox:
+      type: circle
+      radius: 5
+    trajectory: straight
+  range: 640
+
+assets:
+  world_sprite: sprites/items/weapons/magic_orb.png
+  hand_sprite: sprites/items/weapons/magic_orb-hand.png
+  projectile_sprite: sprites/items/weapons/magic_orb-projectile.png
+  recharge_effect: effects/weapons/magic_orb-recharge.png
+  audio:
+    attack: sounds/weapons/magic_orb-attack.wav

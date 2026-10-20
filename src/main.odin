@@ -37,6 +37,8 @@ main :: proc() {
 	slow_potion_frame_duration: f32 = 0.1
 	slow_potion_animation_finished := false
 
+	sword_texture := rl.LoadTexture("assets/sprites/items/weapons/sword.png")
+	defer rl.UnloadTexture(sword_texture) 
 
 	frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
 	if !rl.IsTextureReady(frank_texture) {
@@ -211,7 +213,7 @@ main :: proc() {
 		}
 		// Frank vor der Landschaft zeichnen
 		rl.DrawTextureEx(
-			frank_texture,
+			sword_texture,
 			{frank_x, frank_y},
 			0.0,
 			frank_scale,
