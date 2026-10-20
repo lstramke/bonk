@@ -30,7 +30,7 @@ stats:
 assets:
   world_sprite: sprites/items/weapons/pistol.png
   hand_sprite: sprites/items/weapons/pistol.png
-  projectile_sprite: sprites/items/weapons/pistol-projectile.png
+  projectile_sprite: sprites/items/weapons/pistol_projectile.png
   muzzle_effect: 
   audio:
     attack: sounds/weapons/pistol-attack.wav
