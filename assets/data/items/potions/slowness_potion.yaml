@@ -22,10 +22,14 @@ stats:
         radius: 60
 
 assets:
-  sprite: sprites/items/potions/slow_throw_potion.png
+  sprite: sprites/items/potions/slow_throw_potion_sheet.png
   animation:
-    use: sprites/items/potions/slow_throw_potion_use_sheet.png
-    impact: sprites/items/potions/slow_throw_potion_impact_sheet.png
+    use:
+      frames: [0, 1, 2, 3, 4, 5, 6, 7]
+      fps: 10
+    impact:
+      frames: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+      fps: 10
   audio:
     use:
     impact:
