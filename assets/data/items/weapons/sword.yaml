@@ -26,4 +26,4 @@ assets:
       frames: [1, 2, 3, 4, 5]
       fps: 10
   audio:
-    attack: sounds/weapons/sword_attack.wav
+

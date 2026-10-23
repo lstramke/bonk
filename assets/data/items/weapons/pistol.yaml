@@ -31,8 +31,7 @@ assets:
   spritesheet: sprites/items/weapons/pistol_sheet.png
   animations:
     attack:
-      frames: [1, 2, 3]
+      frames: [0, 1, 2]
       fps: 10
   audio:
-    attack: sounds/weapons/pistol_attack.wav
-    reload: sounds/weapons/pistol_reload.wav
+

@@ -30,5 +30,4 @@ assets:
       frames: [10, 11, 12]
       fps: 10
   audio:
-    attack: sounds/weapons/magic_orb_attack.wav
-    recharge: sounds/weapons/magic_orb_recharge.wav
+
