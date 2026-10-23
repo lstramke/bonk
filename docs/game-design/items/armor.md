@@ -39,8 +39,7 @@ stats:
     magic: 0
 
 assets:
-  world_sprite: sprites/items/armor/iron-helmet.png
-  equipped_sprite: sprites/items/armor/iron-helmet-equipped.png
+  spritesheet: sprites/items/armor/iron_helmet.png
 ```
 
 Die zwei Werte unter `stats.armor` sind für jedes Rüstungsteil erforderlich:
