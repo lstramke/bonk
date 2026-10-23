@@ -1,0 +1,37 @@
+id: pistol
+display_name: Pistol
+description: A reliable short-range weapon.
+
+type: range
+damage_type:
+  - physical
+
+stats:
+  damage:
+    physical: 20
+  attack:
+    mode: single
+    cooldown: 0.33
+    use_time: 0
+  ammunition:
+    magazine_size: 6
+    reserve: 18
+    reloadable: true
+    reload_time: 1.2
+  projectile:
+    speed: 600
+    lifetime: 1.0
+    hitbox:
+      type: circle
+      radius: 2
+    trajectory: straight
+  range: 600
+
+assets:
+  spritesheet: sprites/items/weapons/pistol_sheet.png
+  animations:
+    attack:
+      frames: [0, 1, 2]
+      fps: 10
+  audio:
+

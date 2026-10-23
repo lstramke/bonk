@@ -7,10 +7,10 @@ main :: proc() {
 	rl.InitWindow(1280, 704, "B.O.N.K.")
 	defer rl.CloseWindow()
 
-	trink_potion_texture := rl.LoadTexture("assets/sprites/items/potions/heal_drink_potion.png")
-	defer rl.UnloadTexture(trink_potion_texture)
+	drink_potion_texture := rl.LoadTexture("assets/sprites/items/weapons/pistol.png")
+	defer rl.UnloadTexture(drink_potion_texture)
 
-	heal_drink_animation := rl.LoadTexture("assets/sprites/items/potions/healing_drink_potion_use_sheet.png")
+	heal_drink_animation := rl.LoadTexture("assets/sprites/items/weapons/magic_orb.png")
 	defer rl.UnloadTexture(heal_drink_animation)
 
 	potion_frame_width := 32
@@ -22,13 +22,13 @@ main :: proc() {
 	potion_frame_duration: f32 = 0.1
 	potion_animation_finished := false
 
-	throw_potion_texture := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion.png")
+	throw_potion_texture := rl.LoadTexture("assets/sprites/items/weapons/magic_orb_recharge.png")
 	defer rl.UnloadTexture(throw_potion_texture)
 
-	slow_use_animation := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion_use_sheet.png")
+	slow_use_animation := rl.LoadTexture("assets/sprites/items/weapons/magic_orb.png")
 	defer rl.UnloadTexture(slow_use_animation)
 
-	slow_impact_animation := rl.LoadTexture("assets/sprites/items/potions/slow_throw_potion_impact_sheet.png")
+	slow_impact_animation := rl.LoadTexture("assets/sprites/items/weapons/magic_orb_recharge.png")
 	defer rl.UnloadTexture(slow_impact_animation)
 
 	slow_potion_frame_count := int(slow_impact_animation.width) / potion_frame_width
@@ -37,6 +37,8 @@ main :: proc() {
 	slow_potion_frame_duration: f32 = 0.1
 	slow_potion_animation_finished := false
 
+	sword_texture := rl.LoadTexture("assets/sprites/items/weapons/sword.png")
+	defer rl.UnloadTexture(sword_texture) 
 
 	frank_texture := rl.LoadTexture("assets/sprites/characters/frank.png")
 	if !rl.IsTextureReady(frank_texture) {
@@ -211,7 +213,7 @@ main :: proc() {
 		}
 		// Frank vor der Landschaft zeichnen
 		rl.DrawTextureEx(
-			frank_texture,
+			drink_potion_texture,
 			{frank_x, frank_y},
 			0.0,
 			frank_scale,

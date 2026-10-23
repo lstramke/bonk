@@ -1,0 +1,29 @@
+id: sword
+display_name: Sword
+description: A close-range physical weapon.
+type: melee
+damage_type:
+  - physical
+
+stats:
+  damage:
+    physical: 35
+  attack:
+    mode: swing
+    cooldown: 0.8
+    use_time: 0.25
+  range: 70
+  hitbox:
+    type: arc
+    width: 60
+    height: 45
+    offset: [35, 0]
+
+assets:
+  spritesheet: sprites/items/weapons/sword_sheet.png
+  animations:
+    attack:
+      frames: [1, 2, 3, 4, 5]
+      fps: 10
+  audio:
+

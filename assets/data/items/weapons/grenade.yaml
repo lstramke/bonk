@@ -1,0 +1,38 @@
+id: grenade
+display_name: Grenade
+description: A thrown explosive weapon.
+type: explosive
+damage_type:
+  - physical
+
+stats:
+  damage:
+    physical: 60
+  attack:
+    mode: single
+    cooldown: 1.0
+    use_time: 0.2
+  delivery:
+    speed: 350
+    hitbox:
+      type: circle
+      radius: 6
+    trajectory: ballistic
+  range: 450
+  explosion:
+    trigger: timer
+    timer: 2.0
+    mode: instant
+    hitbox:
+      type: circle
+      radius: 100
+    effect: damage
+    affects_owner: true
+
+assets:
+  spritesheet: sprites/items/weapons/grenade_sheet.png
+  animations:
+    use: 
+      frames: [1, 2, 3]
+      fps: 10
+  audio:
