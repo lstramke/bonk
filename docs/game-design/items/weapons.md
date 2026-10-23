@@ -72,29 +72,21 @@ Waffe validiert.
 
 ```yaml
 assets:
-  world_sprite: sprites/items/weapons/weapon.png
-  hand_sprite: sprites/items/weapons/weapon-hand.png
+  spritesheet: sprites/items/weapons/weapon_sheet.png
+  animations:
+    attack:
+      frames: [1, 2, 3, 4]
+      fps: 10
   audio:
-    attack: sounds/weapons/weapon-attack.wav
+    attack: sounds/weapons/weapon_attack.wav
 ```
 
 | Asset | Bedeutung | Erforderlich |
 | --- | --- | --- |
-| `world_sprite` | Darstellung der Waffe auf der Karte | Ja |
-| `hand_sprite` | Darstellung der gehaltenen Waffe | Ja |
-| `audio.attack` | Sound bei der erfolgreichen Aktivierung des Angriffs | Ja |
-| `projectile_sprite` | Darstellung eines erzeugten Projektils | Bei `projectile` |
-| `ray_sprite` | Darstellung eines sichtbaren Rays | Bei sichtbarem `ray` |
-| `attack_effect` | Visueller Effekt beim Angriff | Optional |
-| `muzzle_effect` | Effekt am Ursprung eines Distanzangriffs | Optional |
-| `audio.reload` | Sound beim Nachladen | Bei nachladbarer Munition |
-| `audio.impact` | Sound beim Aufprall eines Wurfkörpers | Optional |
-| `explosion_sprite` | Darstellung der Explosion | Bei sichtbarer Explosion |
-| `audio.explosion` | Sound beim Auslösen der Explosion | Bei hörbarer Explosion |
+| `spritesheet` | Vollständiges Spritesheet für die Waffe | Ja |
+| `animations` | Sammlung aller Animationsnamen die jeweils ihre frames im spritesheet nennen. | Ja |
+| `audio` | Soundeffekte zu den Animationen oder Aktionen der Waffe | Ja |
 
-Ein Asset ist nur erforderlich, wenn die zugehörige technische Struktur
-verwendet wird. Eine Nahkampfwaffe benötigt beispielsweise kein
-`projectile_sprite`; eine Pistole ohne `ray` benötigt kein `ray_sprite`.
 Gameplay-relevante Werte wie Hitboxen oder Schaden gehören nicht in den
 `assets`-Bereich.
 
@@ -660,11 +652,14 @@ stats:
   range: 600
 
 assets:
-  world_sprite: sprites/items/weapons/pistol.png
-  hand_sprite: sprites/items/weapons/pistol-hand.png
-  projectile_sprite: sprites/items/weapons/pistol-projectile.png
-  muzzle_effect: effects/weapons/pistol-muzzle.png
+  spritesheet: sprites/items/weapons/pistol_sheet.png
+  animations:
+    attack:
+      frames: [1, 2, 3, 4]
+      fps: 10
+    reload:
+      frames: [5, 6, 7, 8]
   audio:
-    attack: sounds/weapons/pistol-attack.wav
-    reload: sounds/weapons/pistol-reload.wav
+    attack: sounds/weapons/weapon_attack.wav
+    reload: sounds/weapons/pistol_reload.wav
 ```
