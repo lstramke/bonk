@@ -21,9 +21,14 @@ stats:
   range: 640
 
 assets:
-  world_sprite: sprites/items/weapons/magic_orb.png
-  hand_sprite: sprites/items/weapons/magic_orb.png
-  projectile_sprite: sprites/items/weapons/magic_orb_projectile.png
-  recharge_effect: effects/weapons/magic_orb_recharge.png
+  spritesheet: sprites/items/weapons/magic_orb_sheet.png
+  animations:
+    recharge:
+      frames: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      fps: 10
+    projectile: 
+      frames: [10, 11, 12]
+      fps: 10
   audio:
-    attack: sounds/weapons/magic_orb-attack.wav
+    attack: sounds/weapons/magic_orb_attack.wav
+    recharge: sounds/weapons/magic_orb_recharge.wav

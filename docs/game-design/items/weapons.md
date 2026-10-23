@@ -660,6 +660,6 @@ assets:
     reload:
       frames: [5, 6, 7, 8]
   audio:
-    attack: sounds/weapons/weapon_attack.wav
+    attack: sounds/weapons/pistol_attack.wav
     reload: sounds/weapons/pistol_reload.wav
 ```

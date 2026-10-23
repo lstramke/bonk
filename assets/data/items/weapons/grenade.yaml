@@ -30,8 +30,7 @@ stats:
     affects_owner: true
 
 assets:
-  world_sprite: sprites/items/weapons/grenade.png
-  hand_sprite: sprites/items/weapons/grenade.png
-  use_effect: 
+  spritesheet: sprites/items/weapons/grenade_sheet.png
   audio:
-    explosion: sounds/weapons/grenade-explosion.wav
+    throw: sounds/weapons/grenade_throw.wav
+    explosion: sounds/weapons/grenade_explosion.wav

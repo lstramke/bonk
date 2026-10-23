@@ -28,10 +28,11 @@ stats:
   range: 600
 
 assets:
-  world_sprite: sprites/items/weapons/pistol.png
-  hand_sprite: sprites/items/weapons/pistol.png
-  projectile_sprite: sprites/items/weapons/pistol_projectile.png
-  muzzle_effect: 
+  spritesheet: sprites/items/weapons/pistol_sheet.png
+  animations:
+    attack:
+      frames: [1, 2, 3]
+      fps: 10
   audio:
-    attack: sounds/weapons/pistol-attack.wav
-    reload: sounds/weapons/pistol-reload.wav
+    attack: sounds/weapons/pistol_attack.wav
+    reload: sounds/weapons/pistol_reload.wav

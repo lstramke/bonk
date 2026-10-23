@@ -20,8 +20,10 @@ stats:
     offset: [35, 0]
 
 assets:
-  world_sprite: sprites/items/weapons/sword_world.png 
-  hand_sprite: sprites/items/weapons/sword_hand.png 
-
+  spritesheet: sprites/items/weapons/sword_sheet.png
+  animations:
+    attack:
+      frames: [1, 2, 3, 4, 5]
+      fps: 10
   audio:
-    attack: sounds/weapons/sword-attack.wav
+    attack: sounds/weapons/sword_attack.wav
