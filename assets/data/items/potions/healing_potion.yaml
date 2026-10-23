@@ -12,8 +12,10 @@ stats:
         amount: 40
 
 assets:
-  sprite: sprites/items/potions/healing_drink_potion.png
+  sprite: sprites/items/potions/healing_drink_potion_sheet.png
   animation:
-    use: sprites/items/potions/healing_drink_potion_use_sheet.png
+    use:
+      frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      fps: 10 
   audio:
     use:

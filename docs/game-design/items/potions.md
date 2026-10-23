@@ -43,9 +43,11 @@ stats:
         amount: 40
 
 assets:
-  sprite: sprites/items/potions/healing_potion.png
+  spritesheet: sprites/items/potions/healing_potion_sheet.png
   animation:
-    use: sprites/items/potions/healing_potion_use.png
+    use: 
+      frames: [0, 1, 2, 3, 4]
+      fps: 10
   audio:
     use: sounds/potions/healing_potion_use.wav
 ```
@@ -80,10 +82,14 @@ stats:
         radius: 60
 
 assets:
-  sprite: sprites/items/potions/slow-flask.png
+  spritesheet: sprites/items/potions/slow_flask_sheet.png
   animation:
-    use: sprites/items/potions/slow_flask_use.png
-    impact: sprites/items/potions/slow_flask_hit.png
+    use: 
+      frames: [1, 2, 3, 4, 5]
+      fps: 8
+    impact: 
+      frames: [6, 7, 8, 9, 10]
+      fps: 8
   audio:
     use: sounds/potions/slow-flask-use.wav
     impact: sounds/potions/slow-flask-impact.wav
@@ -110,9 +116,11 @@ Die Dauer eines Effekts ist unabhängig von der Flugzeit des Projektils.
 
 Jeder Trank definiert seine eigenen Item-Assets:
 
-- `assets.sprite`: Sprite in der Spielwelt.
-- `assets.animation.use`: Verwendungsanimation, ein Trinken beim type drink, ein Wurf bei type throw.
-- `assets.animation.flying`: Animation nach dem Abwurf beim type throw.
+Per Konvention ist das 0 Frame im spritesheet das default sprite für die Welt.
+
+- `assets.spritesheet`: vollständiges Spritesheet.
+- `assets.animation.use`: Verwendungsanimation, angegeben als Frame-Liste bezüglich des Spritesheets.
+- `assets.animation.impact`: Aufprallanimation, angegeben als Frame-Liste bezüglich des Spritesheets. bei throw potion
 - `assets.audio.use`: Sound bei der Benutzung, für alle Tränke erforderlich.
 - `assets.audio.impact`: Sound beim Aufprall, erforderlich für `throw`.
 
