@@ -1,0 +1,13 @@
+id: iron_helmet
+display_name: Iron Helmet
+description: A sturdy helmet that protects against physical damage.
+
+type: head
+
+stats:
+  armor:
+    physical: 25
+    magic: 10
+
+assets:
+  spritesheet: sprites/items/armor/head_armor.png

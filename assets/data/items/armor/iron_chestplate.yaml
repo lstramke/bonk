@@ -1,0 +1,13 @@
+id: iron_chestplate
+display_name: Iron Chestplate
+description: A big iron plate.
+
+type: body
+
+stats:
+  armor:
+    physical: 35
+    magic: 15
+
+assets:
+  spritesheet: sprites/items/armor/body_armor.png
