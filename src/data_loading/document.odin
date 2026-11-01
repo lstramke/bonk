@@ -42,18 +42,6 @@ get_path :: proc(
     return current, true
 }
 
-Null :: struct {}
-
-DocumentValue :: union {
-    string,
-    i64,
-    f64,
-    bool,
-    Null,
-    [dynamic]DocumentValue,
-    map[string]DocumentValue,
-}
-
 debug_print :: proc(document: ^Document) {
     fmt.println("Document {")
     debug_print_mapping(document.root, 1)
