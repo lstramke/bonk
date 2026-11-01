@@ -39,8 +39,8 @@ assets:
   frame_size: [32, 32]
   scale: 1.0
   pivot: [16, 64]
-  icon: 
-  portrait: 
+  icon: null
+  portrait: null
   animations:
     #idle: idle
     run: run
@@ -50,6 +50,6 @@ assets:
     #hurt: hurt
     death: death
   audio:
-    footsteps: 
-    hurt: 
-    death: 
+    footsteps: null
+    hurt: null
+    death: null
