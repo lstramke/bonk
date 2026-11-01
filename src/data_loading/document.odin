@@ -1,9 +1,34 @@
 package data_loading
 
 import "core:fmt"
+import "core:mem"
+import "core:strings"
 
 Document :: struct {
     root: map[string]DocumentValue
+}
+
+document_equals :: proc(a, b: Document) -> bool {
+    return documentValue_equals(a.root, b.root)
+}
+
+@(private)
+document_diff :: proc(
+    expected, actual: Document,
+    allocator: mem.Allocator,
+) -> string {
+    builder: strings.Builder
+    strings.builder_init(&builder, allocator)
+    defer strings.builder_destroy(&builder)
+
+    documentValue_diff(
+        expected.root,
+        actual.root,
+        "root",
+        &builder,
+    )
+
+    return strings.to_string(builder)
 }
 
 get :: proc(
@@ -74,7 +99,7 @@ debug_print_value :: proc(
         fmt.printf("%v\n", v)
     case Null:
         fmt.println("null")
-    case [dynamic]DocumentValue:
+    case []DocumentValue:
         fmt.println("[")
         for item in v {
             debug_print_indent(depth + 1)

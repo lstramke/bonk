@@ -8,10 +8,11 @@ import "core:fmt"
 
 yaml_reader :: proc(
     path: string, 
-    allocator: runtime.Allocator
+    document_allocator: runtime.Allocator
 ) -> (Document, Load_Error) {
-    source_bytes, oserr := os.read_entire_file_from_path(path, allocator)
-
+    defer free_all(context.temp_allocator)
+    
+    source_bytes, oserr := os.read_entire_file_from_path(path, context.temp_allocator)
     if oserr != nil {
         switch oserr {
             case .Not_Exist:
@@ -22,16 +23,18 @@ yaml_reader :: proc(
     }
 
     source := string(source_bytes)
-    lines := tokenize_yaml(source, allocator)
-    for line in lines {
-        fmt.printf("Zeile %d: indent=%d, content='%s'\n",
-            line.line_number,
-            line.indent,
-            line.content,
-        )
+    lines := tokenize_yaml(source, context.temp_allocator)
+    when ODIN_DEBUG {
+        for line in lines {
+            fmt.printf("Zeile %d: indent=%d, content='%s'\n",
+                line.line_number,
+                line.indent,
+                line.content,
+            )
+        }
     }
 
-    document, err := parse_yaml(lines[:], allocator)
+    document, err := parse_yaml(lines, document_allocator)
     if err.type != .NONE {
         return {}, err
     }
@@ -39,18 +42,18 @@ yaml_reader :: proc(
     return document, {}
 }
 
-@(private)
+@(private="file")
 Yaml_Line :: struct{
     indent: int,
     content: string,
     line_number: int
 }
 
-@(private)
+@(private="file")
 tokenize_yaml :: proc(
     source: string, 
     allocator: runtime.Allocator
-) -> [dynamic]Yaml_Line {
+) -> []Yaml_Line {
     lines := make([dynamic]Yaml_Line, allocator)
 
     line_start := 0
@@ -81,27 +84,27 @@ tokenize_yaml :: proc(
             append(&lines, Yaml_Line {
                 indent  = indent,
                 content = content,
-                line_number    = line_number,
+                line_number = line_number,
             })
         }
 
         line_start = i + 1
         line_number += 1
     }
-    return lines
+    return lines[:]
 }
 
-@(private)
+@(private="file")
 parse_yaml :: proc(
     lines: []Yaml_Line,
-    allocator: runtime.Allocator
+    document_allocator: runtime.Allocator
 ) -> (Document, Load_Error) {
     if len(lines) == 0 {
         return {}, {.EMPTY_FILE, "file must be not empty"}
     }
 
     index := 0
-    root, err := parse_collection(lines, &index, lines[0].indent, allocator)
+    root, err := parse_collection(lines, &index, lines[0].indent, document_allocator)
     if err.type != .NONE {
         return {}, err
     }
@@ -117,12 +120,12 @@ parse_yaml :: proc(
     return Document{root = root_object}, {}
 }
 
-@(private)
+@(private="file")
 parse_collection :: proc(
     lines: []Yaml_Line,
     index: ^int,
     indent: int,
-    allocator: runtime.Allocator,
+    document_allocator: runtime.Allocator,
 ) -> (DocumentValue, Load_Error) {
     if index^ >= len(lines) {
         return {}, {}
@@ -134,7 +137,7 @@ parse_collection :: proc(
     }
 
     if strings.has_prefix(line.content, "- ") {
-        sequence, err := parse_sequence(lines, index, indent, allocator)
+        sequence, err := parse_sequence(lines, index, indent, document_allocator)
         if err.type != .NONE {
             return {}, err
         }
@@ -142,7 +145,7 @@ parse_collection :: proc(
         return DocumentValue(sequence), {}
     }
 
-    mapping, err := parse_mapping(lines, index, indent, allocator)
+    mapping, err := parse_mapping(lines, index, indent, document_allocator)
     if err.type != .NONE {
         return {}, err
     }
@@ -150,14 +153,14 @@ parse_collection :: proc(
     return DocumentValue(mapping), {}
 }
 
-@(private)
+@(private="file")
 parse_mapping :: proc(
     lines: []Yaml_Line,
     index: ^int,
     indent: int,
-    allocator: runtime.Allocator,
+    document_allocator: runtime.Allocator,
 ) -> (map[string]DocumentValue, Load_Error) {
-    mapping := make(map[string]DocumentValue, allocator)
+    mapping := make(map[string]DocumentValue, document_allocator)
 
     for index^ < len(lines) {
         line := lines[index^]
@@ -175,15 +178,14 @@ parse_mapping :: proc(
             return {}, {.INVALID_FORMAT, "Expected ':' in mapping entry"}
         }
 
-        key := line.content[:separator_index]
+        key := strings.clone(line.content[:separator_index], document_allocator)
         value := strings.trim_space(line.content[separator_index + 1:])
         
         if len(value) > 0 {
-            scalarValue, err := parse_scalarValue(value, allocator)
+            scalarValue, err := parse_scalarValue(value, document_allocator)
             if err.type != .NONE {
                 return {}, err
             }
-
             mapping[key] = scalarValue
             index^ += 1
         } else {
@@ -197,7 +199,7 @@ parse_mapping :: proc(
                 lines,
                 index,
                 lines[index^].indent,
-                allocator,
+                document_allocator,
             )
         
             if err.type != .NONE {
@@ -211,14 +213,14 @@ parse_mapping :: proc(
     return mapping, {}
 }
 
-@(private)
+@(private="file")
 parse_sequence :: proc(
     lines: []Yaml_Line,
     index: ^int,
     indent: int,
-    allocator: runtime.Allocator,
-) -> ([dynamic]DocumentValue, Load_Error) {
-    sequence := make([dynamic]DocumentValue, allocator)
+    document_allocator: runtime.Allocator,
+) -> ([]DocumentValue, Load_Error) {
+    sequence := make([dynamic]DocumentValue, document_allocator)
 
     for index^ < len(lines) {
         line := lines[index^]
@@ -238,17 +240,16 @@ parse_sequence :: proc(
                 lines[index^].content = strings.trim_space(line.content[2:])
                 lines[index^].indent += 2
 
-                mapping, err := parse_mapping(lines, index, indent + 2, allocator)
+                mapping, err := parse_mapping(lines, index, indent + 2, document_allocator)
                 if err.type != .NONE {
                     return {}, err
                 }
                 append(&sequence, mapping)
             } else {
-                scalarValue, err := parse_scalarValue(line_value, allocator)
+                scalarValue, err := parse_scalarValue(line_value, document_allocator)
                 if err.type != .NONE {
                     return {}, err
                 }
-
                 append(&sequence, scalarValue)
                 index^ += 1
             }
@@ -263,7 +264,7 @@ parse_sequence :: proc(
                 lines,
                 index,
                 lines[index^].indent,
-                allocator,
+                document_allocator,
             )
         
             if err.type != .NONE {
@@ -274,13 +275,13 @@ parse_sequence :: proc(
         }
     }
 
-    return sequence, {}
+    return sequence[:], {}
 }
 
-@(private)
+@(private="file")
 parse_scalarValue :: proc(
     value: string,
-    allocator: runtime.Allocator,
+    document_allocator: runtime.Allocator,
 ) -> (DocumentValue, Load_Error) {
 
     if value == "null" || value == "[]" {
@@ -296,7 +297,7 @@ parse_scalarValue :: proc(
     }
 
     if len(value) > 2 && value[0] == '[' && value[len(value)-1] == ']' {
-        return parse_inline_array(value[1:len(value)-1], allocator)
+        return parse_inline_array(value[1:len(value)-1], document_allocator)
     }
 
     integer, i_ok := strconv.parse_i64(value)
@@ -309,28 +310,31 @@ parse_scalarValue :: proc(
         return float, {}
     }
 
-    return DocumentValue(value), {}
+    if len(value) >= 2 && value[0] == '{' && value[len(value)-1] == '}' {
+        return {}, {.INVALID_FORMAT, "Flow mappings are not supported"}
+    }
+
+    return DocumentValue(strings.clone(value, document_allocator)), {}
 }
 
-@(private)
+@(private="file")
 parse_inline_array :: proc(
     value: string, 
-    allocator: runtime.Allocator
-) -> ([dynamic]DocumentValue, Load_Error) {
-    inline_array := make([dynamic]DocumentValue, allocator)
+    document_allocator: runtime.Allocator
+) -> ([]DocumentValue, Load_Error) {
+    inline_array := make([dynamic]DocumentValue, document_allocator)
 
-    array_elements := strings.split(value, ",")
+    array_elements := strings.split(value, ",", context.temp_allocator)
 
     for array_element in array_elements {
         element := strings.trim_space(array_element)
 
-        parsed_element, err := parse_scalarValue(element, allocator)
-        if err.type != .NONE {
+        parsed_element, err := parse_scalarValue(element, document_allocator)
+        if err.type != .NONE{
             return {}, err
         }
-
         append(&inline_array, parsed_element)
     }
 
-    return inline_array, {}
+    return inline_array[:], {}
 }

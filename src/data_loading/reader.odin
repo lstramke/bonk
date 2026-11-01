@@ -1,3 +1,8 @@
 package data_loading
 
-Reader :: proc() -> (Document, Load_Error)
+import "base:runtime"
+
+Reader :: proc(
+    path: string, 
+    document_allocator: runtime.Allocator
+) -> (Document, Load_Error)
