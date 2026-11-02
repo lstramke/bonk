@@ -37,7 +37,7 @@ main :: proc() {
     document_allocator := vmem.arena_allocator(&document_arena)
     defer vmem.arena_destroy(&document_arena)
 
-    loader := data_loading.Data_Loader{data_loading.yaml_reader}
+    loader := data_loading.create_yaml_data_loader()
 
 	document, err := data_loading.load_data(&loader, "assets/data/characters/frank.yaml", document_allocator)
 	if err.type != .NONE {

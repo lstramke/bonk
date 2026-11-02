@@ -3,8 +3,13 @@ package data_loading
 import "core:fmt"
 import "core:strings"
 
-Null :: struct {}
+/*
+DocumentValue represents a value stored in a Document.
 
+Supported values include strings, signed 64-bit integers, 64-bit floating
+point numbers, booleans, null values, sequences of document values, and
+string-keyed mappings of document values.
+*/
 DocumentValue :: union {
     string,
     i64,
@@ -14,6 +19,11 @@ DocumentValue :: union {
     []DocumentValue,
     map[string]DocumentValue,
 }
+
+/*
+Null represents an explicit null value in a document.
+*/
+Null :: struct {}
 
 documentValue_equals :: proc(a, b: DocumentValue) -> bool {
     switch av in a{

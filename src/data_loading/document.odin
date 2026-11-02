@@ -4,12 +4,86 @@ import "core:fmt"
 import "core:mem"
 import "core:strings"
 
+/*
+Document represents a document as a recursive tree.
+
+The root is always a string-keyed mapping. Each mapping value may contain any
+DocumentValue, including nested mappings and sequences, allowing the complete
+document structure to be represented as a tree.
+*/
 Document :: struct {
     root: map[string]DocumentValue
 }
 
+/*
+document_equals reports whether two documents contain equivalent values.
+
+Parameters:
+    a: The first document to compare.
+    b: The second document to compare.
+
+Returns:
+    True when both documents contain equal values; otherwise, false.
+*/
 document_equals :: proc(a, b: Document) -> bool {
     return documentValue_equals(a.root, b.root)
+}
+
+/*
+get retrieves a top-level value by key.
+
+Parameters:
+document: The document to query.
+key: The top-level key to look up.
+
+Returns:
+The value associated with key and a boolean indicating whether it exists.
+*/
+get :: proc(
+    document: ^Document,
+    key: string
+) -> (DocumentValue, bool) {
+    value, ok := document.root[key]
+    return value, ok
+}
+
+/*
+get_path retrieves a nested value by following a sequence of keys.
+
+Parameters:
+document: The document to query.
+keys: The keys forming the path to the requested value.
+
+Returns:
+The value at the path and a boolean indicating whether the complete path
+exists.
+*/
+get_path :: proc(
+    document: ^Document,
+    keys: ..string
+) -> (DocumentValue, bool) {
+    if len(keys) == 0 {
+        return {}, false
+    }
+    
+    current := DocumentValue(document.root)
+    
+    for key in keys {
+        object, ok := current.(map[string]DocumentValue)
+        if !ok {
+            return {}, false
+        }
+        
+        value : DocumentValue
+        value, ok = object[key]
+        if !ok {
+            return {}, false
+        }
+        
+        current = value
+    }
+    
+    return current, true
 }
 
 @(private)
@@ -29,42 +103,6 @@ document_diff :: proc(
     )
 
     return strings.to_string(builder)
-}
-
-get :: proc(
-    document: ^Document,
-    key: string
-) -> (DocumentValue, bool) {
-    value, ok := document.root[key]
-    return value, ok
-}
-
-get_path :: proc(
-    document: ^Document,
-    keys: ..string
-) -> (DocumentValue, bool) {
-    if len(keys) == 0 {
-        return {}, false
-    }
-
-    current := DocumentValue(document.root)
-
-    for key in keys {
-        object, ok := current.(map[string]DocumentValue)
-        if !ok {
-            return {}, false
-        }
-
-        value : DocumentValue
-        value, ok = object[key]
-        if !ok {
-            return {}, false
-        }
-
-        current = value
-    }
-
-    return current, true
 }
 
 debug_print :: proc(document: ^Document) {

@@ -6,6 +6,37 @@ import "base:runtime"
 import "core:os"
 import "core:fmt"
 
+/*
+yaml_reader loads a YAML document from a file.
+
+The path must be a resolved file path produced by the configured path
+resolver. yaml_reader does not resolve environment-specific paths or validate
+the logical path accepted by Data_Loader.
+
+The reader parses the supported YAML subset into the recursive Document tree.
+The supported subset includes:
+- mappings with scalar or nested values,
+- sequences introduced by "-",
+- scalar values including strings, integers, floating-point numbers, booleans,
+  and null,
+- non-nested inline arrays,
+- LF ("\\n") and CRLF ("\\r\\n") line endings.
+
+Empty lines and lines whose first non-whitespace character is "#" are ignored.
+Inline comments are not supported and become part of the parsed value.
+Inline mappings and nested inline arrays are not supported.
+
+The reader uses document_allocator for all memory owned by the returned
+document.
+
+Parameters:
+    path: The path of the YAML file to load.
+    document_allocator: The allocator used for document contents.
+
+Returns:
+    The parsed Document and a Load_Error. The error describes file access,
+    empty input, or invalid YAML input.
+*/
 yaml_reader :: proc(
     path: string, 
     document_allocator: runtime.Allocator
