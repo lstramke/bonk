@@ -25,12 +25,10 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@2026.09.28.1
+        uses: Homebrew/actions/setup-homebrew@2026.10.26.1
 
       - name: Install Odin and raylib
-        run: |
-          brew update
-          brew install odin raylib
+        run: brew install odin raylib
 
       - name: Run Odin tests
         run: odin test src -all-packages -define:ODIN_TEST_ALWAYS_REPORT_MEMORY=true -define:ODIN_TEST_FAIL_ON_BAD_MEMORY=true
@@ -48,9 +46,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Install Odin and raylib
-        run: |
-          brew update
-          brew install odin raylib
+        run: brew install odin raylib
 
       - name: Build application
         run: |
