@@ -29,5 +29,5 @@ assets:
     projectile: 
       frames: [10, 11, 12]
       fps: 10
-  audio:
+  audio: null
 

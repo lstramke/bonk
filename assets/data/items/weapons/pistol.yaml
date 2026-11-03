@@ -33,5 +33,5 @@ assets:
     attack:
       frames: [0, 1, 2]
       fps: 10
-  audio:
+  audio: null
 

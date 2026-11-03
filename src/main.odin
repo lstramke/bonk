@@ -48,13 +48,13 @@ main :: proc() {
 
     vmem.arena_free_all(&document_arena)
 
-	document, err = data_loading.load_data(&loader, "assets/data/items/potions/healing_potion.yaml", document_allocator)
+	document, err = data_loading.load_data(&loader, "assets/maps/grasslands.yaml", document_allocator)
 	if err.type != .NONE {
 		fmt.println(err.message)
 	}
 	data_loading.debug_print(&document)
 
-	fmt.println(data_loading.get_path(&document, "stats", "effects"))
+	fmt.println(data_loading.get_path(&document, "layers"))
 
     test_array := make([dynamic]int, context.allocator)
     defer delete(test_array)
