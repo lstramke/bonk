@@ -1,0 +1,13 @@
+id: iron_boots
+display_name: Iron Boots
+description: Iron boots made from iron.
+
+type: feet
+
+stats:
+  armor:
+    physical: 15
+    magic: 5
+
+assets:
+  spritesheet: sprites/items/armor/feet_armor.png
