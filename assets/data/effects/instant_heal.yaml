@@ -5,6 +5,6 @@ defaults:
   amount: 25
 
 assets:
-  status_sprite:
+  status_sprite: null
   audio:
-    apply:
+    apply: null
