@@ -6,7 +6,7 @@ defaults:
   duration: 4.0
 
 assets:
-  status_sprite: null
+  status_sprite: sprites/items/effects/slow_effect_sheet.png
   audio:
     apply: null
     expire: null

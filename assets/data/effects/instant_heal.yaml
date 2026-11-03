@@ -5,6 +5,6 @@ defaults:
   amount: 25
 
 assets:
-  status_sprite: null
+  status_sprite: sprites/items/effects/heal_effect_sheet.png
   audio:
     apply: null
