@@ -6,7 +6,7 @@ description: Eine grüne Landschaft in mehreren Etagen.
 tile_size: [32, 32]
 
 background: sprites/backgrounds/grassland.png
-music:
+music: null
 
 tile_mapping:
   0: null
