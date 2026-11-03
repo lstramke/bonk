@@ -35,7 +35,7 @@ Parameters:
 Returns:
     The loaded Document and a Load_Error. The error type is NONE on success.
 */
-load_data :: proc(
+load :: proc(
     loader: ^Data_Loader,
     path: string,
     document_allocator: runtime.Allocator

@@ -39,7 +39,7 @@ main :: proc() {
 
     loader := data_loading.create_yaml_data_loader()
 
-	document, err := data_loading.load_data(&loader, "assets/data/characters/frank.yaml", document_allocator)
+	document, err := data_loading.load(&loader, "assets/data/characters/frank.yaml", document_allocator)
 	if err.type != .NONE {
 		fmt.println(err.message)
 	}
@@ -48,7 +48,7 @@ main :: proc() {
 
     vmem.arena_free_all(&document_arena)
 
-	document, err = data_loading.load_data(&loader, "assets/maps/grasslands.yaml", document_allocator)
+	document, err = data_loading.load(&loader, "assets/maps/grasslands.yaml", document_allocator)
 	if err.type != .NONE {
 		fmt.println(err.message)
 	}
