@@ -1,0 +1,12 @@
+id: heal_over_time
+type: heal
+
+defaults:
+  amount_per_tick: 10
+  duration: 5
+
+
+assets:
+  status_sprite: sprites/items/effects/heal_effect_sheet.png
+  audio:
+    apply: null
