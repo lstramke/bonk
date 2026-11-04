@@ -42,7 +42,7 @@ determine_abs_asset_root :: proc(
         case .MACOS_APP:
             asset_root, err = filepath.join({
                 executable_dir,
-                "../Resources/assets"
+                "../Resources"
             })
         case .DEV:
             asset_root, err = filepath.join({
