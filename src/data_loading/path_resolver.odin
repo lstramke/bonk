@@ -4,15 +4,13 @@ import "core:path/filepath"
 import "core:os"
 import "core:strings"
 
-ASSET_MODE_MACOS_APP :: #config(ASSET_MODE_MACOS_APP, false)
-
 Path_Resolver :: struct {
     asset_root: string,
 }
 
-create_path_resolver :: proc() -> (Path_Resolver, Load_Error) {
-    executable_dir, err := os.get_executable_directory(context.allocator)
-    if err != nil {
+create_path_resolver :: proc(mode: ASSET_MODE) -> (Path_Resolver, Load_Error) {
+    executable_dir, os_err := os.get_executable_directory(context.allocator)
+    if os_err != nil {
         return {}, {
             .EXECUTABLE_DIR_NOT_FOUND, 
             "Error getting executable directory"
@@ -20,19 +18,38 @@ create_path_resolver :: proc() -> (Path_Resolver, Load_Error) {
     }
     defer delete(executable_dir)
 
-    asset_root : string
-    when ASSET_MODE_MACOS_APP {
-        asset_root, err = filepath.join({
-            executable_dir,
-            "../Resources/assets"
-        })
-    } else {
-        asset_root, err = filepath.join({
-            executable_dir,
-            "../assets"
-        })
+    asset_root_abs, err := determine_abs_asset_root(executable_dir, mode)
+
+    if !os.is_dir(asset_root_abs) {
+        delete(asset_root_abs)
+        return {}, {
+            .ASSET_ROOT_NOT_FOUND,
+            "Asset root directory does not exist",
+        }
     }
 
+    return Path_Resolver{asset_root=asset_root_abs}, {}
+}
+
+@(private="file")
+determine_abs_asset_root :: proc(
+    executable_dir: string,
+    mode: ASSET_MODE,
+) -> (string, Load_Error) {
+    asset_root : string
+    err : os.Error
+    switch mode {
+        case .MACOS_APP:
+            asset_root, err = filepath.join({
+                executable_dir,
+                "../Resources/assets"
+            })
+        case .DEV:
+            asset_root, err = filepath.join({
+                executable_dir,
+                "../assets"
+            })
+    }
     if err != nil {
         return {}, {
             .PATH_RESOLUTION_FAILED,
@@ -51,15 +68,7 @@ create_path_resolver :: proc() -> (Path_Resolver, Load_Error) {
         }
     }
     
-    if !os.is_dir(asset_root_abs) {
-        delete(asset_root_abs)
-        return {}, {
-            .ASSET_ROOT_NOT_FOUND,
-            "Asset root directory does not exist",
-        }
-    }
-
-    return Path_Resolver{asset_root=asset_root_abs}, {}
+    return asset_root_abs, {}
 }
 
 delete_path_resolver :: proc(resolver: ^Path_Resolver) {

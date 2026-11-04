@@ -1,6 +1,5 @@
 package main
 
-import "core:path/filepath"
 import "core:log"
 import "core:fmt"
 import mem "core:mem"
@@ -10,6 +9,12 @@ import rl "vendor:raylib"
 import "data_loading"
 
 main :: proc() {
+
+    ASSET_MODE_MACOS_APP :: #config(ASSET_MODE_MACOS_APP, false)
+    mode := data_loading.ASSET_MODE.DEV
+    when ASSET_MODE_MACOS_APP {
+        mode = data_loading.ASSET_MODE.MACOS_APP
+    }
 
 	when ODIN_DEBUG {
         track: mem.Tracking_Allocator
@@ -39,7 +44,7 @@ main :: proc() {
     document_allocator := vmem.arena_allocator(&document_arena)
     defer vmem.arena_destroy(&document_arena)
 
-    path_resolver, resolver_err := data_loading.create_path_resolver()
+    path_resolver, resolver_err := data_loading.create_path_resolver(mode)
     if resolver_err.type != .NONE {
         log.warn(resolver_err.message)
     }
