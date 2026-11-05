@@ -8,4 +8,5 @@ Weapon_Common :: struct {
     description: string,
     damage: map[utils.Damage_Type]f32,
     attack: Attack,
+    assets: utils.Assets
 }
