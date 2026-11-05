@@ -33,6 +33,16 @@ test_resolve_path :: proc(t: ^testing.T) {
             expected_error = .INVALID_FILE_PATH,
             description = "Rejects paths outside allowed asset directories",
         },
+        {
+            relative_path = "/assets/maps/test.yaml",
+            expected_error = .INVALID_FILE_PATH,
+            description = "Rejects absolute asset paths",
+        },
+        {
+            relative_path = "maps/\x00test.yaml",
+            expected_error = .INVALID_FILE_PATH,
+            description = "Rejects asset paths containing NUL characters",
+        },
     }
 
     resolver := Path_Resolver{asset_root = "/assets"}

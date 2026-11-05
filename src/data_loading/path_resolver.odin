@@ -19,6 +19,9 @@ create_path_resolver :: proc(mode: ASSET_MODE) -> (Path_Resolver, Load_Error) {
     defer delete(executable_dir)
 
     asset_root_abs, err := determine_abs_asset_root(executable_dir, mode)
+    if err.type != .NONE {
+        return {}, err
+    }
 
     if !os.is_dir(asset_root_abs) {
         delete(asset_root_abs)
