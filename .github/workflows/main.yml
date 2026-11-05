@@ -51,7 +51,7 @@ jobs:
       - name: Build application
         run: |
           mkdir -p bin
-          odin build src -out:bin/bonk -o:speed
+          odin build src -out:bin/bonk -o:speed -define:ASSET_MODE_MACOS_APP=true
 
       - name: Create application bundle
         run: |
