@@ -1,6 +1,7 @@
 package potions
 
 import "../effects"
+import "../utils"
 
 Potion_Commons :: struct {
     id: string,
@@ -9,4 +10,5 @@ Potion_Commons :: struct {
     use_time: f32,
     target: Potion_Target,
     effects: []effects.Effect,
+    assets: utils.Assets
 }
