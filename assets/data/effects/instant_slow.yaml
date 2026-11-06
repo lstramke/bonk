@@ -1,5 +1,5 @@
 id: instant_slow
-type: movement_speed
+type: speed_modifier
 
 defaults:
   multiplier: 0.5

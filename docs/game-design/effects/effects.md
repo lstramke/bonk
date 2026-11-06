@@ -31,7 +31,7 @@ Effekte definieren ihre Wirkungsart, Standardwerte und optional zugehörige Asse
 
 ```yaml
 id: slow
-type: movement_speed
+type: speed_modifier
 
 defaults:
   multiplier: 0.5
@@ -74,7 +74,7 @@ Bei einer `duration` von `6.0` Sekunden und einem `tick_interval` von `1.0` Seku
 Eine Effektdefinition enthält:
 
 * `id`: Eindeutige ID des Effekts.
-* `type`: Art der Wirkung, beispielsweise `heal`, `armor`, `movement_speed`, `damage_modifier` oder `poison`.
+* `type`: Art der Wirkung, beispielsweise `heal`, `armor`, `speed_modifier`, `damage_modifier` oder `poison`.
 * `defaults`: Standardwerte für konfigurierbare Parameter wie `amount`, `damage`, `multiplier`, `duration` und `tick_interval`.
 * `assets`: Optionale visuelle und akustische Ressourcen.
 
@@ -117,7 +117,7 @@ Der Effekt kann dadurch in unterschiedlichen Spielsystemen mit verschiedenen St�
 * `duration`: Dauer des Effekts.
 * `damage_types`: Optional betroffene Schadensarten.
 
-### `movement_speed`
+### `speed_modifier`
 
 * `multiplier`: Multiplikator auf die normale Bewegungsgeschwindigkeit.
 * `duration`: Dauer des Effekts.
