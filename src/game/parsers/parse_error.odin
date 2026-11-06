@@ -7,5 +7,6 @@ Parse_Error :: struct {
 
 Parse_Error_Type :: enum {
     NONE,
-
+    EMPTY_DOCUMENT,
+    INVALID_FORMAT,
 }
