@@ -9,6 +9,7 @@ import rl "vendor:raylib"
 import "data_loading"
 import "game/model/effects"
 import "game/parsers"
+import "game/registry"
 
 main :: proc() {
     when ODIN_DEBUG {
@@ -113,8 +114,15 @@ main :: proc() {
     }
 
     vmem.arena_free_all(&document_arena)
-    fmt.println(effect)
-    fmt.println(effect2)
-    fmt.println(effect3)
+    effect_regsitry := registry.create_effect_registry(definition_allocator)
+
+    registry.register_effect(&effect_regsitry, &effect)
+    registry.register_effect(&effect_regsitry, &effect2)
+    registry.register_effect(&effect_regsitry, &effect3)
+
+    fmt.println(registry.get_effect(&effect_regsitry, "instant_heal"))
+    fmt.println(registry.get_effect(&effect_regsitry, "heal_over_time"))
+    fmt.println(registry.get_effect(&effect_regsitry, "instant_slow"))
+
     vmem.arena_free_all(&definition_arena)
 }
