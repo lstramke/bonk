@@ -5,13 +5,11 @@ import "../model/effects"
 
 Effect_Registry :: struct {
     definitions: map[string]effects.Effect,
-    allocator: runtime.Allocator,
 }
 
 create_effect_registry :: proc(allocator: runtime.Allocator) -> Effect_Registry {
     return Effect_Registry{
         definitions = make(map[string]effects.Effect, allocator),
-        allocator = allocator,
     }
 }
 
