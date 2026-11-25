@@ -6,6 +6,7 @@ import mem "core:mem"
 import vmem "core:mem/virtual"
 import rl "vendor:raylib"
 
+import "logging"
 import "data_loading"
 import "game/model/effects"
 import "game/parsers"
@@ -34,9 +35,9 @@ main :: proc() {
         }
     }
 
-    logger := log.create_console_logger()
+    logger := logging.setup_logger()
     context.logger = logger
-    defer log.destroy_console_logger(logger)
+    defer logging.destroy_logger(logger)
 
     ASSET_MODE_MACOS_APP :: #config(ASSET_MODE_MACOS_APP, false)
     mode := data_loading.ASSET_MODE.DEV
@@ -73,8 +74,6 @@ main :: proc() {
         log.error(err.message)
         return
     }
-    data_loading.debug_print(&document)
-    
     effect, parse_err := parsers.parse_effect(&document, definition_allocator)
     if parse_err.type != .NONE {
         log.error(parse_err.message)
@@ -90,7 +89,6 @@ main :: proc() {
         log.error(err2.message)
         return
     }
-    data_loading.debug_print(&document2)
     effect2, parse_err2 := parsers.parse_effect(&document2, definition_allocator)
     if parse_err2.type != .NONE {
         log.error(parse_err2.message)
@@ -106,7 +104,6 @@ main :: proc() {
         log.error(err3.message)
         return
     }
-    data_loading.debug_print(&document3)
     effect3, parse_err3 := parsers.parse_effect(&document3, definition_allocator)
     if parse_err3.type != .NONE {
         log.error(parse_err3.message)

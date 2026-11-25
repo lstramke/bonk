@@ -2,6 +2,7 @@ package parsers
 
 import "base:runtime"
 import "core:strings"
+import "core:log"
 import "../../data_loading"
 import "../model/effects"
 import "../model/utils"
@@ -36,14 +37,24 @@ parse_effect :: proc(
         assets = assets,
     }
 
+    effect : effects.Effect
+    parse_err : Parse_Error
+
     switch effect_type {
         case "heal":
-            return parse_heal(document, commons)
+            effect, parse_err =  parse_heal(document, commons)
         case "speed_modifier":
-            return parse_speed_modifier(document, commons)
+            effect, parse_err = parse_speed_modifier(document, commons)
+        case:
+            return {}, invalid_effect(strings.concatenate({"unsupported effect type: ", effect_type}, allocator))
     }
 
-    return {}, invalid_effect(strings.concatenate({"unsupported effect type: ", effect_type}, allocator))
+    if parse_err.type != .NONE {
+        return {}, parse_err
+    }
+
+    log.debugf("Parsed effect '%s' (type: %s)", id, effect_type)
+    return effect, {}
 }
 
 @(private="file")

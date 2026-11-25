@@ -43,6 +43,7 @@ compile_commands.json
 *~
 
 # Logs and local environment files
+logs/
 *.log
 .env
 .env.*
