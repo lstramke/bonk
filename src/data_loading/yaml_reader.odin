@@ -4,7 +4,7 @@ import "core:strconv"
 import "core:strings"
 import "base:runtime"
 import "core:os"
-import "core:fmt"
+import "core:log"
 
 /*
 yaml_reader loads a YAML document from a file.
@@ -55,14 +55,15 @@ yaml_reader :: proc(
 
     source := string(source_bytes)
     lines := tokenize_yaml(source, context.temp_allocator)
-    when ODIN_DEBUG {
-        for line in lines {
-            fmt.printf("Zeile %d: indent=%d, content='%s'\n",
-                line.line_number,
-                line.indent,
-                line.content,
-            )
-        }
+    
+    log.debugf("Tokenized YAML file '%s': %d lines", path, len(lines))
+    for line in lines {
+        log.debugf(
+            "Line %d: indent=%d, content='%s'",
+            line.line_number,
+            line.indent,
+            line.content,
+        )
     }
 
     document, err := parse_yaml(lines, document_allocator)
@@ -70,6 +71,7 @@ yaml_reader :: proc(
         return {}, err
     }
 
+    log.debugf("Successfully parsed YAML file '%s'", path)
     return document, {}
 }
 
